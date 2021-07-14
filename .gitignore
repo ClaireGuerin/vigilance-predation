@@ -56,3 +56,12 @@
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+
+# files created by Visual Code Studio, put in /.vscode/ forlder
+/.vscode/*
+
+# CMake list and all cmake files stored in build folder
+/build/*
+CMakeLists.txt
+
+
