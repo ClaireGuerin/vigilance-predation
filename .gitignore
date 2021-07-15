@@ -60,8 +60,7 @@
 # files created by Visual Code Studio, put in /.vscode/ forlder
 /.vscode/*
 
-# CMake list and all cmake files stored in build folder
+# All cmake files stored in build folder
 /build/*
-CMakeLists.txt
 
 
