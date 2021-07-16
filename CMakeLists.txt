@@ -1,11 +1,17 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(vigipred VERSION 0.1.0)
 
-include(CTest)
-enable_testing()
+# specify the C++ standard
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-add_executable(vigipred main.cpp)
+#include(CTest)
+#enable_testing()
+
+# add executable(s)
+add_executable(vigipred main.cpp src/Grid.cpp)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
+
