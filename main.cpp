@@ -4,6 +4,7 @@
 #include "src/Utils.h"
 #include "src/Individual.h"
 #include "src/Grid.h"
+#include "src/Population.h"
 
 int main() 
 {
@@ -18,6 +19,9 @@ int main()
   for (auto& ind : pop) {
     ind.set_random_coord(resourcesGrid.dim(), reng);
   }
+
+  auto popu = vigi::Population{param};
+  std::cout << "Pop size: " << popu.size() << "\n";
 
   return 0;
 }
