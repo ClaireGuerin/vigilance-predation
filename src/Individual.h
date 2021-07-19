@@ -26,6 +26,11 @@ namespace vigi {
     Coord coordinate_ = Coord{};
   };
 
+  Individual::Individual(const Parameter& param) : 
+    v_(param.v)
+  {
+  }
+
 }
 
 #endif
