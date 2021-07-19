@@ -2,7 +2,7 @@
 #define VIGI_GRID_H
 
 #include <vector>
-#include "vigi.h"
+#include "Utils.h"
 
 namespace grid {
 

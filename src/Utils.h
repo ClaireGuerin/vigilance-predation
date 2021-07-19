@@ -1,5 +1,5 @@
-#ifndef VIGI_VIGI_H_INCLUDED
-#define VIGI_VIGI_H_INCLUDED
+#ifndef VIGI_UTILS_H_INCLUDED
+#define VIGI_UTILS_H_INCLUDED
 
 #include <random>
 

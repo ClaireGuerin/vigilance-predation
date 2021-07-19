@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <random>
-#include "src/vigi.h"
+#include "src/Utils.h"
 #include "src/Individual.h"
 #include "src/Grid.h"
 
