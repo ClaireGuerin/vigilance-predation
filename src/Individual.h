@@ -17,7 +17,6 @@ private:
     double storage = 0;
     bool isAlive = true;
     Coord coordinates;
-    static rnd::rng coordRng;
 public:
     Individual(int);
     Individual(int, double);
