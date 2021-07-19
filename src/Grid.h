@@ -1,38 +1,29 @@
-#ifndef GRID_H
-#define GRID_H
+#ifndef VIGI_GRID_H
+#define VIGI_GRID_H
+
 #include <vector>
-using namespace std;
+#include "vigi.h"
 
-template <typename T>
-class Grid { 
+namespace vigi {
 
-public:
-    
-    int dim;
-
-    Grid(int edgeSize) :    dim (edgeSize * edgeSize),
-                            linResources (edgeSize * edgeSize),
-                            linShare (dim) { 
-        // create an empty vector of size edge size ^ 2
+  class Grid
+  {
+  public:
+    explicit Grid(const Parameter& param) :
+      dim_(param.edgeSize),
+      resources_(param.edgeSize * param.edgeSize, param.initResources),
+      share_(param.edgeSize * param.edgeSize, 0.0)
+    {
     }
 
-    Grid(int edgeSize, T initResources) :   dim (edgeSize * edgeSize),
-                                            linResources (dim, initResources), 
-                                            linShare (dim) { 
-        // first par int = edge size, second par type T = init value
-    }
+    size_t dim() const { return dim_; }
 
-    vector<T> resourceDistri() {
-        return linResources;
-    }
+  private:
+    size_t dim_;
+    std::vector<double> resources_;
+    std::vector<double> share_;
+  };
 
-    vector<T> shareDistri() {
-        return linResources;
-    }
-    
-private:
-    vector<T> linResources; // store the square grid's resource info into a linear vector
-    vector<T> linShare; // store the square grid's resource share info into a linear vector
-};
- 
+}
+
 #endif

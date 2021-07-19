@@ -1,27 +1,31 @@
-#ifndef INDIVIDUAL_H
-#define INDIVIDUAL_H
+#ifndef VIGI_INDIVIDUAL_H
+#define VIGI_INDIVIDUAL_H
+
 #include <vector>
-using namespace std;
+#include "vigi.h"
 
-struct Coord {
-    int x;
-    int y;
-};
+namespace vigi {
 
-class Individual {
-private:
-    int m;
-    double v;
-    bool mutant;
-    double storage = 0;
-    bool isAlive = true;
-    Coord coordinates;
-public:
-    Individual(int);
-    Individual(int, double);
-    //~Individual(); // in case I need a destructor, might come in handy for new generation? 
-};
+  
+  class Individual 
+  {
+  public:
+    explicit Individual(const Parameter& param);
 
+    template <typename RENG>
+    void set_random_coord(size_t edgeSize, RENG& reng)
+    {
+      coordinate_ = randomCoord(edgeSize, reng);
+    }
 
+  private:
+    double v_;
+    bool mutant_ = false;
+    double storage_ = 0;
+    bool isAlive_ = true;
+    Coord coordinate_ = Coord{};
+  };
+
+}
 
 #endif

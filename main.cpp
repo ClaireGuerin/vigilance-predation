@@ -1,16 +1,21 @@
 #include <iostream>
+#include <vector>
+#include <random>
+#include "src/vigi.h"
+#include "src/Individual.h"
 #include "src/Grid.h"
-using namespace std;
 
-int main() {
-    Grid<double> myGrid(3, 0);
-    
-    cout << "Created grid of dim " << myGrid.dim << "\n";
 
-    vector<double> linGrid = myGrid.resourceDistri();
-    for (int i = 0; i < myGrid.dim; ++i) {
-        cout << "value " << i << " = " << linGrid[i] << "\n";
-    }
+int main() 
+{
+  auto param = vigi::Parameter{};
+  auto grid = vigi::Grid{param};
+  
+  std::vector<vigi::Individual> pop{ param.popSize, vigi::Individual{param} };
+  auto reng = std::default_random_engine{};
+  for (auto& ind : pop) {
+    ind.set_random_coord(grid.dim(), reng);
+  }
 
-    return 0;
+  return 0;
 }
