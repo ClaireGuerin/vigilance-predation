@@ -3,16 +3,16 @@
 Individual::Individual(int m_in) :  v(0.5),
                                     m(m_in) {
     static rnd::rng coordRng;
-    coordinates.x = rnd::randomInt(0, m)(coordRng);
-    coordinates.y = rnd::randomInt(0, m)(coordRng);
+    coordinates.x = rnd::randomInt(0, m - 1)(coordRng);
+    coordinates.y = rnd::randomInt(0, m - 1)(coordRng);
                                 
 }
 
 Individual::Individual(int m_in, double v_in) : m(m_in),
                                                 v(v_in) {
     static rnd::rng coordRng;
-    coordinates.x = rnd::randomInt(0, m)(coordRng);
-    coordinates.y = rnd::randomInt(0, m)(coordRng);
+    coordinates.x = rnd::randomInt(0, m - 1)(coordRng);
+    coordinates.y = rnd::randomInt(0, m - 1)(coordRng);
 }
 
 

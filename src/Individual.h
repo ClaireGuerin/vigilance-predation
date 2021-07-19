@@ -21,6 +21,7 @@ public:
     Individual(int);
     Individual(int, double);
     //~Individual(); // in case I need a destructor, might come in handy for new generation? 
+    Coord getCoordinates() { return coordinates;}; 
 };
 
 
