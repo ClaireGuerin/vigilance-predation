@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 #enable_testing()
 
 # add executable(s)
-add_executable(vigipred main.cpp src/Grid.cpp)
+add_executable(vigipred main.cpp src/Grid.h)
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})

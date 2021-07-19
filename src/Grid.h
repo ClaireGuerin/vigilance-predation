@@ -7,13 +7,32 @@ template <typename T>
 class Grid { 
 
 public:
-    Grid(int); // create an empty vector of size edge size ^ 2
-    Grid(int, T); // first par int = edge size, second par type T = init value
-    vector<T> getGrid();
+    
     int dim;
+
+    Grid(int edgeSize) :    dim (edgeSize * edgeSize),
+                            linResources (edgeSize * edgeSize),
+                            linShare (dim) { 
+        // create an empty vector of size edge size ^ 2
+    }
+
+    Grid(int edgeSize, T initResources) :   dim (edgeSize * edgeSize),
+                                            linResources (dim, initResources), 
+                                            linShare (dim) { 
+        // first par int = edge size, second par type T = init value
+    }
+
+    vector<T> resourceDistri() {
+        return linResources;
+    }
+
+    vector<T> shareDistri() {
+        return linResources;
+    }
     
 private:
-    vector<T> linearGrid; // store the square grid info into a linear vector
+    vector<T> linResources; // store the square grid's resource info into a linear vector
+    vector<T> linShare; // store the square grid's resource share info into a linear vector
 };
  
 #endif
