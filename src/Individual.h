@@ -1,6 +1,7 @@
 #ifndef INDIVIDUAL_H
 #define INDIVIDUAL_H
 #include <vector>
+#include "Random.h"
 using namespace std;
 
 struct Coord {
@@ -16,6 +17,7 @@ private:
     double storage = 0;
     bool isAlive = true;
     Coord coordinates;
+    static rnd::rng coordRng;
 public:
     Individual(int);
     Individual(int, double);
