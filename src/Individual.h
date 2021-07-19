@@ -15,15 +15,17 @@ namespace vigi {
     template <typename RENG>
     void set_random_coord(size_t edgeSize, RENG& reng)
     {
-      coordinate_ = randomCoord(edgeSize, reng);
+      coordinates_ = randomCoord(edgeSize, reng);
     }
+
+    vigi::Coord coordinates() const { return coordinates_; }
 
   private:
     double v_;
-    bool mutant_ = false;
+    bool isMutant_ = false;
     double storage_ = 0;
     bool isAlive_ = true;
-    Coord coordinate_ = Coord{};
+    Coord coordinates_ = Coord{};
   };
 
   Individual::Individual(const Parameter& param) : 

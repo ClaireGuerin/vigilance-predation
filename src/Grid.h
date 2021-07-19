@@ -4,7 +4,7 @@
 #include <vector>
 #include "Utils.h"
 
-namespace grid {
+namespace grd {
 
   template<typename T>
   class Grid
@@ -23,7 +23,7 @@ namespace grid {
       return fill_[(x * dim_) + y];
     }
 
-    void write(size_t x, size_t y, T fill) {
+    void operator++(size_t x, size_t y, T fill) {
       fill_[(x * dim_) + y] = fill;
     }
 
