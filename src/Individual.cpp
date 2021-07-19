@@ -1,21 +1,11 @@
+#include <random>
 #include "Individual.h"
 
-Individual::Individual(int m_in) :  v(0.5),
-                                    m(m_in) {
-    static rnd::rng coordRng;
-    coordinates.x = rnd::randomInt(0, m - 1)(coordRng);
-    coordinates.y = rnd::randomInt(0, m - 1)(coordRng);
-                                
+namespace vigi {
+
+  Individual::Individual(const Parameter& param) : 
+    v_(param.v)
+  {
+  }
+
 }
-
-Individual::Individual(int m_in, double v_in) : m(m_in),
-                                                v(v_in) {
-    static rnd::rng coordRng;
-    coordinates.x = rnd::randomInt(0, m - 1)(coordRng);
-    coordinates.y = rnd::randomInt(0, m - 1)(coordRng);
-}
-
-
-/*Individual::~Individual() // in case I need a destructor, might come in handy for new generation?
-{
-}*/

@@ -1,36 +1,23 @@
 #include <iostream>
-#include "src/Grid.h"
+#include <vector>
+#include <random>
+#include "src/vigi.h"
 #include "src/Individual.h"
-using namespace std;
+#include "src/Grid.h"
 
-int main() {
-    Grid<double> myGrid(3, 0);
-    
-    cout << "Created grid of dim " << myGrid.dim << "\n";
+int main() 
+{
+  auto param = vigi::Parameter{};
+  auto resourcesGrid = grid::Grid<double>{param.edgeSize, param.initResources};
+  std::cout << "First cell: " << resourcesGrid.read(0,0) << "\n";
+  resourcesGrid.write(0, 0, 12.3);
+  std::cout << "First cell new: " << resourcesGrid.read(0,0) << "\n";
+  
+  std::vector<vigi::Individual> pop{ param.popSize, vigi::Individual{param} };
+  auto reng = std::default_random_engine{};
+  for (auto& ind : pop) {
+    ind.set_random_coord(resourcesGrid.dim(), reng);
+  }
 
-    vector<double> linGrid = myGrid.resourceDistri();
-    for (int i = 0; i < myGrid.dim; ++i) {
-        cout << "value " << i << " = " << linGrid[i] << "\n";
-    }
-
-    Individual myInd(10);
-    Coord coord = myInd.getCoordinates();
-
-    cout    << "Created indiv and placed on grid of size 10, at coordinates: "
-            << coord.x << ", " << coord.y << "\n";
-
-    Individual myInd2(10);
-    Coord coord2 = myInd2.getCoordinates();
-
-    cout    << "Created indiv and placed on grid of size 10, at coordinates: "
-            << coord2.x << ", " << coord2.y << "\n";
-
-    Individual myInd3(10);
-    Coord coord3 = myInd3.getCoordinates();
-
-    cout    << "Created indiv and placed on grid of size 10, at coordinates: "
-            << coord3.x << ", " << coord3.y << "\n";
-
-
-    return 0;
+  return 0;
 }
