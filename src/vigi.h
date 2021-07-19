@@ -11,7 +11,7 @@ namespace vigi {
     double initResources = 1.0;   // initial resources
 
     size_t popSize = 1000;                         
-    double v = 1.0;                       // ??
+    double v = 1.0;                       // initial vigilance level
   };
 
 
