@@ -22,6 +22,8 @@ namespace vigi {
 
     double vigilance() const { return vigilance_; }
 
+    bool isAlive() const { return isAlive_; }
+
     template <typename RENG>
     void mutate(const Parameter& param, RENG& reng) {
       isMutant_ = randomBool(param.mutRate, reng);
@@ -34,8 +36,9 @@ namespace vigi {
 
     template <typename RENG>
     void explore(const Parameter& param, RENG& reng) {
-      Coord unbounded = randomMove(coordinates_, reng);
-      coordinates_ = { bound(unbounded.x, 0, static_cast<int>(param.edgeSize) - 1), bound(unbounded.y, 0, static_cast<int>(param.edgeSize) - 1) };
+        Coord unbounded = randomMove(coordinates_, reng);
+        coordinates_ = {  bound(unbounded.x, 0, static_cast<int>(param.edgeSize) - 1), 
+                          bound(unbounded.y, 0, static_cast<int>(param.edgeSize) - 1) };
     }
 
     template <typename RENG>
@@ -48,7 +51,7 @@ namespace vigi {
 
     template <typename RENG>
     void reproduce(const Parameter& param, RENG& reng) {
-      double fertility = float(param.residualFertility + param.fecundity * storage_);
+      double fertility = param.residualFertility + param.fecundity * storage_;
       nOffspring_ = randomRepro(fertility, reng);
     }
 

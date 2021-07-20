@@ -10,7 +10,10 @@ namespace vigi {
     size_t edgeSize = 100;              // grid size
     double initResources = 1.0;         // initial resources
 
-    size_t popSize = 1000;                         
+    size_t popSize = 1000; 
+    size_t nGen = 100;                  // number of generations
+    size_t ecoTime = 4;                 // number of ecological steps per generation
+
     double v = 1.0;                     // initial vigilance level
     double mutRate = 0.01;              // mutation rate
     double mutStep = 0.02;              // mutation step (deviation)
@@ -23,6 +26,8 @@ namespace vigi {
 
     double residualFertility = 0.0001;  // fertility cannot be zero (poisson distri), so when ind has no resources, its fertility is residual
     double fecundity = 2.0;
+
+    double rGrowth = 2.0;               // resources growth rate
 
   };
 
