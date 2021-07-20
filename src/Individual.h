@@ -44,14 +44,19 @@ namespace vigi {
       isAlive_ = randomBool((1 - predationRisk), reng);
     }
 
-    void gather(const Parameter& param, double resources, double share) {
-      storage_ += param.eff * resources * share; 
+    void gather(const Parameter&, double, double);
+
+    template <typename RENG>
+    void reproduce(const Parameter& param, RENG& reng) {
+      double fertility = float(param.residualFertility + param.fecundity * storage_);
+      nOffspring_ = randomRepro(fertility, reng);
     }
 
   private:
+    size_t nOffspring_ = 0;
     double vigilance_;
+    double storage_ = 0.0;
     bool isMutant_ = false;
-    double storage_ = 0;
     bool isAlive_ = true;
     Coord coordinates_ = Coord{};
   };
@@ -59,6 +64,10 @@ namespace vigi {
   Individual::Individual(const Parameter& param) : 
     vigilance_(param.v)
   {
+  }
+
+  void Individual::gather(const Parameter& param, double resources, double share) {
+    storage_ += param.eff * resources * share; 
   }
 
 }

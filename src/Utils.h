@@ -7,19 +7,23 @@ namespace vigi {
 
   struct Parameter
   {
-    size_t edgeSize = 100;        // grid size
-    double initResources = 1.0;   // initial resources
+    size_t edgeSize = 100;              // grid size
+    double initResources = 1.0;         // initial resources
 
     size_t popSize = 1000;                         
-    double v = 1.0;               // initial vigilance level
-    double mutRate = 0.01;        // mutation rate
-    double mutStep = 0.02;        // mutation step (deviation)
-    bool bounded = true;          // is the phenotype bounded between 0 and 1?
+    double v = 1.0;                     // initial vigilance level
+    double mutRate = 0.01;              // mutation rate
+    double mutStep = 0.02;              // mutation step (deviation)
+    bool bounded = true;                // is the phenotype bounded between 0 and 1?
 
-    double p = 0.2;               // basal predation risk
+    double p = 0.2;                     // basal predation risk
 
-    double eff = 0.9;             // efficiency in resources extraction
-    double competition = 1.0;      // gamma, intra-cell competition for resources
+    double eff = 0.9;                   // efficiency in resources extraction
+    double competition = 1.0;           // gamma, intra-cell competition for resources
+
+    double residualFertility = 0.0001;  // fertility cannot be zero (poisson distri), so when ind has no resources, its fertility is residual
+    double fecundity = 2.0;
+
   };
 
 
@@ -54,6 +58,13 @@ namespace vigi {
   double randomDev(double mutationStep, RENG& reng)
   {
     auto pdist = std::normal_distribution<>(0, mutationStep);
+    return pdist(reng);
+  }
+
+  template <typename RENG>
+  size_t randomRepro(double fertility, RENG& reng)
+  {
+    auto pdist = std::poisson_distribution<>(fertility);
     return pdist(reng);
   }
 

@@ -37,6 +37,7 @@ int main()
     ind.survive(param, reng);
   }
 
+  std::cout << "Calculating shares of resources on grid...\n";
   for (size_t cell = 0; cell < (abundance.dim() * abundance.dim()); ++cell) {
     // share = SUM(1-v_i)/(gamma*n), gamma = competition parameter
     double shareCell = (abundance.read(cell) - vigilance.read(cell)) / (param.competition * abundance.read(cell));
@@ -49,6 +50,10 @@ int main()
     ind.gather(param, resources.read(c.x, c.y), shares.read(c.x, c.y));
   }
 
+  std::cout << "Individuals reproduce...\n";
+  for (auto& ind : pop.individuals()) {
+    ind.reproduce(param, reng);
+  }
 
   return 0;
 }
