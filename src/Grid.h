@@ -18,14 +18,26 @@ namespace grd {
 
     size_t dim() const { return dim_; }
 
+    T read(size_t pos) {
+      return fill_[pos];
+    }
+
     T read(size_t x, size_t y) {
       // grid fill stored linearly: x = 0, y = 0; x = 0, y = 1; ... x = 0, y = dim; ... x = 1, y = 0; ...
       return fill_[(x * dim_) + y];
     }
 
-    void operator++(size_t x, size_t y, T fill) {
+    void write(size_t pos, T fill) {
+      fill_[pos] = fill;
+    }
+
+    void write(size_t x, size_t y, T fill) {
       fill_[(x * dim_) + y] = fill;
     }
+
+    /*void operator++(size_t x, size_t y) {
+      ++fill_[(x * dim_) + y];
+    }*/
 
   private:
     size_t dim_;

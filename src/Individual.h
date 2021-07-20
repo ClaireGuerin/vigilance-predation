@@ -20,8 +20,36 @@ namespace vigi {
 
     vigi::Coord coordinates() const { return coordinates_; }
 
+    double vigilance() const { return vigilance_; }
+
+    template <typename RENG>
+    void mutate(const Parameter& param, RENG& reng) {
+      isMutant_ = randomBool(param.mutRate, reng);
+      if (isMutant_) {
+        double deviation = randomDev(param.mutStep, reng);
+        double phen = vigilance_ + deviation;
+        vigilance_ = (param.bounded) ? bound(phen, 0.0, 1.0) : phen;
+      }
+    }
+
+    template <typename RENG>
+    void explore(const Parameter& param, RENG& reng) {
+      Coord unbounded = randomMove(coordinates_, reng);
+      coordinates_ = { bound(unbounded.x, 0, static_cast<int>(param.edgeSize) - 1), bound(unbounded.y, 0, static_cast<int>(param.edgeSize) - 1) };
+    }
+
+    template <typename RENG>
+    void survive(const Parameter& param, RENG& reng) {
+      double predationRisk = param.p * (1 - vigilance_); // 0 <= p <= 1 is the basal predation risk 
+      isAlive_ = randomBool((1 - predationRisk), reng);
+    }
+
+    void gather(const Parameter& param, double resources, double share) {
+      storage_ += param.eff * resources * share; 
+    }
+
   private:
-    double v_;
+    double vigilance_;
     bool isMutant_ = false;
     double storage_ = 0;
     bool isAlive_ = true;
@@ -29,7 +57,7 @@ namespace vigi {
   };
 
   Individual::Individual(const Parameter& param) : 
-    v_(param.v)
+    vigilance_(param.v)
   {
   }
 
