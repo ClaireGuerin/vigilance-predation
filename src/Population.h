@@ -67,11 +67,14 @@ namespace vigi {
                     auto abund = grd::Grid<size_t>{param.edgeSize * param.edgeSize, 0};
 
                     for (auto& ind : individuals_) {
-                        if (ind.isAlive()) {
+                        if (ind.isAlive_) {
                             ind.explore(param, reng);
-                            Coord c = ind.coordinates();
-                            vigil.write(c.x, c.y, vigil.read(c.x, c.y) + ind.vigilance());
-                            abund.write(c.x, c.y, abund.read(c.x, c.y) + 1);
+                            vigil.write(ind.coordinates_.x, 
+                                        ind.coordinates_.y, 
+                                        vigil.read(ind.coordinates_.x, ind.coordinates_.y) + ind.vigilance_);
+                            abund.write(ind.coordinates_.x, 
+                                        ind.coordinates_.y, 
+                                        abund.read(ind.coordinates_.x, ind.coordinates_.y) + 1);
                         }
                     }
 
@@ -94,11 +97,11 @@ namespace vigi {
 
                 
                 for (auto& ind : individuals_) {
-                    if (ind.isAlive()) {
-                        Coord c = ind.coordinates();
-
+                    if (ind.isAlive_) {
                         // individuals gather resources
-                        ind.gather(param, resources.read(c.x, c.y), shares.read(c.x, c.y));
+                        ind.gather( param, 
+                                    resources.read(ind.coordinates_.x, ind.coordinates_.y), 
+                                    shares.read(ind.coordinates_.x, ind.coordinates_.y));
                         // individuals survive or get predated upon
                         ind.survive(param, reng);
                     }

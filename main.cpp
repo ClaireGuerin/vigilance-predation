@@ -18,7 +18,6 @@ int main()
   std::cout << "Placing individuals on grid...\n";
   for (auto& ind : pop.individuals()) {
     ind.set_random_coord(param.edgeSize * param.edgeSize, reng);
-    vigi::Coord c = ind.coordinates();
   }
 
   // ECOLOGICAL TIME STEPS

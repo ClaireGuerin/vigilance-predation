@@ -21,11 +21,11 @@ namespace vigi {
       coordinates_ = randomCoord(edgeSize, reng);
     }
 
-    vigi::Coord coordinates() const { return coordinates_; }
+    // vigi::Coord coordinates() const { return coordinates_; }
 
-    double vigilance() const { return vigilance_; }
+    // double vigilance() const { return vigilance_; }
 
-    bool isAlive() const { return isAlive_; }
+    // bool isAlive() const { return isAlive_; }
 
     template <typename RENG>
     void mutate(const Parameter& param, RENG& reng) {
