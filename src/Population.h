@@ -28,7 +28,7 @@ namespace vigi {
     std::vector<vigi::Individual>& individuals() noexcept { return individuals_; }    // not the best idea
 
     template <typename RENG>
-    Grid<double>& ecologicalStep(const Parameter& param, RENG& reng, const grd::Grid<double>& resources) 
+    Grid<double>& ecologicalStep(const Parameter& param, RENG& reng, const Grid<double>& resources) 
     {
       individualsExplore(param, reng);
       individualsGatherAndSurvive(param, resources, reng);
@@ -61,7 +61,7 @@ namespace vigi {
             
     template <typename RENG>
     void individualsGatherAndSurvive(const Parameter& param, 
-                                     const grd::Grid<double> resources,
+                                     const grd::Grid<double>& resources,
                                      RENG& reng) 
     {
       for (size_t cell = 0; cell < shares_.size(); ++cell) {
@@ -83,7 +83,7 @@ namespace vigi {
     
   inline Population::Population(const Parameter& param) :
     individuals_(param.popSize, vigi::Individual{ param }),
-    vigidance_(param.popSize),
+    vigidance_(param.edgeSize),
     shares_(param.edgeSize)
   {
   }
