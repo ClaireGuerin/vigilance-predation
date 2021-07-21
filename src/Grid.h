@@ -2,6 +2,7 @@
 #define VIGI_GRID_H
 
 #include <vector>
+#include <algorithm>
 #include <cassert>
 
 
@@ -42,6 +43,11 @@ namespace grd {
     size_t dim() const noexcept { return dim_; }
     size_t size() const noexcept { return fill_.size(); }
 
+    void assign(const value_type& val) 
+    { 
+      std::fill(begin(), end(), val); 
+    }
+    
     const value_type& operator()(int x, int y) const
     {
       assert((x >= 0) && (x < dim_) && (y >= 0) && (y < dim_));

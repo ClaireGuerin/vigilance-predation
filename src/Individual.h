@@ -2,6 +2,7 @@
 #define VIGI_INDIVIDUAL_H
 
 #include <vector>
+#include <algorithm>
 #include "Utils.h"
 
 namespace vigi {
@@ -18,7 +19,7 @@ namespace vigi {
       coordinates_ = randomCoord(edgeSize, reng);
     }
 
-    vigi::Coord coordinates() const { return coordinates_; }
+    Coord coordinates() const { return coordinates_; }
 
     double vigilance() const { return vigilance_; }
 
@@ -30,15 +31,15 @@ namespace vigi {
       if (isMutant_) {
         double deviation = randomDev(param.mutStep, reng);
         double phen = vigilance_ + deviation;
-        vigilance_ = (param.bounded) ? bound(phen, 0.0, 1.0) : phen;
+        vigilance_ = (param.bounded) ? std::clamp(phen, 0.0, 1.0) : phen;
       }
     }
 
     template <typename RENG>
     void explore(const Parameter& param, RENG& reng) {
         Coord unbounded = randomMove(coordinates_, reng);
-        coordinates_ = {  bound(unbounded.x, 0, static_cast<int>(param.edgeSize) - 1), 
-                          bound(unbounded.y, 0, static_cast<int>(param.edgeSize) - 1) };
+        coordinates_ = {  std::clamp(unbounded.x, 0, static_cast<int>(param.edgeSize) - 1), 
+                          std::clamp(unbounded.y, 0, static_cast<int>(param.edgeSize) - 1) };
     }
 
     template <typename RENG>

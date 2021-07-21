@@ -2,6 +2,7 @@
 #define VIGI_UTILS_H_INCLUDED
 
 #include <random>
+#include <algorithm>
 #include "Grid.h"
 
 
@@ -72,14 +73,6 @@ namespace vigi {
   {
     auto pdist = std::poisson_distribution<>(fertility);
     return pdist(reng);
-  }
-
-  template <typename N>
-  N bound(N num, N min, N max) {
-    if (num > max) num = max;
-    else if (num < min) num = min;
-
-    return num;
   }
 
 }
