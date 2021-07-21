@@ -13,7 +13,7 @@ int main()
   
   auto pop = vigi::Population{param};
   std::cout << "Pop size: " << pop.size() << "\n";
-  auto resources = grd::Grid<double>{param.edgeSize * param.edgeSize, param.initResources};
+  auto resources = vigi::Grid<double>{param.edgeSize * param.edgeSize, param.initResources};
 
   std::cout << "Placing individuals on grid...\n";
   for (auto& ind : pop.individuals()) {
@@ -29,8 +29,9 @@ int main()
     // resourceConsumption = 1 - self.efficiency * shares
     // resourceGrowth = self.grid.resources * self.growth
     for (size_t cell = 0; cell < (param.edgeSize * param.edgeSize); ++cell) {
-      resources.write(cell, 
-                      resources.read(cell) * param.rGrowth * (1 - param.eff * shares.read(cell)));
+      //resources.write(cell,
+      //  resources.read(cell) * param.rGrowth * (1 - param.eff * shares.read(cell)));
+      resources[cell] *= param.rGrowth * (1.0 - param.eff * shares[cell]);
     }
   }
 

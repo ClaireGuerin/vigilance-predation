@@ -51,8 +51,10 @@ namespace vigi {
                         if (ind.isAlive()) {
                             ind.explore(param, reng);
                             Coord c = ind.coordinates();
-                            vigil.write(c.x, c.y, vigil.read(c.x, c.y) + ind.vigilance());
-                            abund.write(c.x, c.y, abund.read(c.x, c.y) + 1);
+//                          vigil.write(c.x, c.y, vigil.read(c.x, c.y) + ind.vigilance());
+//                          abund.write(c.x, c.y, abund.read(c.x, c.y) + 1);
+                            vigil(c) += ind.vigilance();
+                            abund(c) += 1;
                         }
                     }
 
@@ -65,12 +67,17 @@ namespace vigi {
                                                 grd::Grid<double> resources,
                                                 RENG& reng) {
                 // calculate share of resources
-                auto shares = grd::Grid<double>{param.edgeSize * param.edgeSize, 0.0};
+                auto shares = Grid<double>{param.edgeSize * param.edgeSize, 0.0};
+                //for (size_t cell = 0; cell < (param.edgeSize * param.edgeSize); ++cell) {
+                //  // share = SUM(1-v_i)/(gamma*n), gamma: competition parameter
+                //  double shareCell = (vigidance.second.read(cell) - vigidance.first.read(cell)) / (param.competition * vigidance.second.read(cell));
+                //  shares.write(cell, shareCell);
+                //}
 
+                auto& [whatever_is_first, whatever_is_second] = vigidance;
                 for (size_t cell = 0; cell < (param.edgeSize * param.edgeSize); ++cell) {
                     // share = SUM(1-v_i)/(gamma*n), gamma: competition parameter
-                    double shareCell = (vigidance.second.read(cell) - vigidance.first.read(cell)) / (param.competition * vigidance.second.read(cell));
-                    shares.write(cell, shareCell);
+                    shares[cell] = (whatever_is_second[cell] - whatever_is_first[cell]) / (param.competition * whatever_is_second[cell]);
                 }
 
                 
@@ -79,7 +86,8 @@ namespace vigi {
                         Coord c = ind.coordinates();
 
                         // individuals gather resources
-                        ind.gather(param, resources.read(c.x, c.y), shares.read(c.x, c.y));
+//                        ind.gather(param, resources.read(c.x, c.y), shares.read(c.x, c.y));
+                        ind.gather(param, resources(c), shares(c));
                         // individuals survive or get predated upon
                         ind.survive(param, reng);
                     }

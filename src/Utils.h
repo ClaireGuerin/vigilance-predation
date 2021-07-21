@@ -2,8 +2,14 @@
 #define VIGI_UTILS_H_INCLUDED
 
 #include <random>
+#include "Grid.h"
+
 
 namespace vigi {
+
+  using grd::Coord;
+  using grd::Grid;
+
 
   struct Parameter
   {
@@ -32,12 +38,6 @@ namespace vigi {
   };
 
 
-  struct Coord
-  {
-    int x;
-    int y;
-  };
-
   template <typename RENG>
   Coord randomCoord(size_t edgeSize, RENG& reng)
   {
@@ -46,7 +46,7 @@ namespace vigi {
   }
 
   template <typename RENG>
-  Coord randomMove(Coord current, RENG& reng)
+  Coord randomMove(const Coord& current, RENG& reng)
   {
     auto pdist = std::uniform_int_distribution<>(-1, 1);
     return { current.x + pdist(reng), current.y + pdist(reng) };

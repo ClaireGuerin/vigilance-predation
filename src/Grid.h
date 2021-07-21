@@ -2,49 +2,86 @@
 #define VIGI_GRID_H
 
 #include <vector>
-#include "Utils.h"
+#include <cassert>
+
 
 namespace grd {
+
+
+  struct Coord
+  {
+    int x;
+    int y;
+  };
+
 
   template<typename T>
   class Grid
   {
   public:
-    Grid(const size_t edgeSize, const T initFill) :
+    using value_type = T;
+
+    // make it explicit that we are fine with the compiler-generated stuff
+    Grid(const Grid&) = default;                      // copy constructor 
+    Grid(Grid&&) = default;                           // move constructor
+    Grid& operator=(const Grid&) = default;           // asignment
+    Grid& operator=(Grid&&) = default;                // move assignment 
+
+    explicit Grid(const size_t edgeSize) :
+      dim_(edgeSize),
+      fill_(edgeSize * edgeSize)
+    {
+    }
+
+    Grid(const size_t edgeSize, const value_type& initFill) :
       dim_(edgeSize),
       fill_(edgeSize * edgeSize, initFill)
-      {
-      }
-
-    size_t dim() const { return dim_; }
-
-    T read(size_t pos) {
-      return fill_[pos];
+    {
     }
 
-    T read(size_t x, size_t y) {
-      // grid fill stored linearly: x = 0, y = 0; x = 0, y = 1; ... x = 0, y = dim; ... x = 1, y = 0; ...
-      return fill_[(x * dim_) + y];
+    size_t dim() const noexcept { return dim_; }
+    size_t elements() const noexcept { return fill_.size(); }
+
+    const value_type& operator()(int x, int y) const
+    {
+      assert((x >= 0) && (x < dim_) && (y >= 0) && (y < dim_));
+      return fill_[dim_ * y + x];   // row-major, we are in C/C++ ;)
     }
 
-    void write(size_t pos, T fill) {
-      fill_[pos] = fill;
+    value_type& operator()(int x, int y)
+    {
+      assert((x >= 0) && (x < dim_) && (y >= 0) && (y < dim_));
+      return fill_[dim_ * y + x];   // row-major, we are in C/C++ ;)
     }
 
-    void write(size_t x, size_t y, T fill) {
-      fill_[(x * dim_) + y] = fill;
+    const value_type& operator()(const Coord& coor) const 
+    { 
+      return this->operator()(coor.x, coor.y); 
+    }
+    
+    value_type& operator()(const Coord& coor) 
+    { 
+      return this->operator()(coor.x, coor.y); 
     }
 
-    /*void operator++(size_t x, size_t y) {
-      ++fill_[(x * dim_) + y];
-    }*/
+    // linear access
+    const value_type& operator[](size_t lin_idx) const { return fill_[lin_idx]; }
+    value_type& operator[](size_t lin_idx) { return fill_[lin_idx]; }
+
+    // the user should be able to access iterators into the linear buffer
+    // for use in STL algorithms, range for loop etc.
+    auto begin() noexcept { return fill_.begin(); }
+    auto begin() const noexcept { return fill_.begin(); }
+    auto cbegin() const noexcept { return fill_.cbegin(); }
+
+    auto end() noexcept { return fill_.end(); }
+    auto end() const noexcept { return fill_.end(); }
+    auto cend() const noexcept { return fill_.cend(); }
 
   private:
     size_t dim_;
-    std::vector<double> fill_;
+    std::vector<T> fill_;
   };
 }
-
-
 
 #endif
