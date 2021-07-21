@@ -19,9 +19,9 @@ namespace vigi {
     template <typename RENG>
     void place(const Parameter & par, RENG& reng) 
     {
-        for (auto& ind : individuals_) {
-            ind.set_random_coord(par.edgeSize, reng);
-        }
+      for (auto& ind : individuals_) {
+        ind.set_random_coord(par.edgeSize, reng);
+      }
     }
 
     const std::vector<vigi::Individual>& individuals() const noexcept { return individuals_; }
@@ -36,8 +36,7 @@ namespace vigi {
     }
 
   private:
-    struct vigil_abund_t
-    {
+    struct vigil_abund_t {
       double vigil;
       size_t abund;
     };
@@ -52,7 +51,7 @@ namespace vigi {
       for (auto& ind : individuals_) {
         if (ind.isAlive()) {
           ind.explore(param, reng);
-          Coord c = ind.coordinates();
+          auto c = ind.coordinates();
           vigidance_(c).vigil += ind.vigilance();
           ++vigidance_(c).abund;
         }
@@ -71,7 +70,7 @@ namespace vigi {
       }
       for (auto& ind : individuals_) {
         if (ind.isAlive()) {
-          Coord c = ind.coordinates();
+          auto c = ind.coordinates();
           ind.gather(param, resources(c), shares_(c));
           // individuals survive or get predated upon
           ind.survive(param, reng);
