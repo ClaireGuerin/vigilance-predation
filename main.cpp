@@ -21,11 +21,11 @@ int main()
     ind.set_random_coord(param.edgeSize * param.edgeSize, reng);
   }
 
-/*  std::ofstream ofs("vigilance.txt"); 
+  std::ofstream ofs("resources.txt"); 
   if(!ofs.is_open()) {
     std::cerr << "error: unable to open vigilance file\n";
     exit(EXIT_FAILURE);
-  }*/
+  }
 
   for (size_t gen = 0; gen < param.nGen; ++gen) {
 
@@ -46,10 +46,13 @@ int main()
         // limit growth of resources arbitrarily set to 200 / fecundity
         for (size_t cell = 0; cell < (param.edgeSize * param.edgeSize); ++cell) {
           double tmpRes = resources.read(cell) * param.rGrowth * (1 - param.eff * shares.read(cell));
-          resources.write(cell, 
-                          (tmpRes > (200 / param.fecundity)) ? param.initResources : tmpRes);
-
+          double replaceRes = (tmpRes > (200 / param.fecundity)) ? param.initResources : tmpRes;
+          resources.write(cell, replaceRes);
+          // write out resources
+          ofs << replaceRes << " ";
         }
+
+        ofs << "\n";
 
       }
 
