@@ -7,6 +7,7 @@
 
 namespace vigi {
 
+  // selective using directives
   using grd::Coord;
   using grd::Grid;
 
@@ -18,7 +19,7 @@ namespace vigi {
 
     size_t popSize = 1000; 
     size_t nGen = 100;                  // number of generations
-    size_t ecoTime = 4;                 // number of ecological steps per generation
+    size_t ecoTime = 50;                 // number of ecological steps per generation
 
     double v = 1.0;                     // initial vigilance level
     double mutRate = 0.01;              // mutation rate

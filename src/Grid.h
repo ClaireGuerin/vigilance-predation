@@ -40,7 +40,7 @@ namespace grd {
     }
 
     size_t dim() const noexcept { return dim_; }
-    size_t elements() const noexcept { return fill_.size(); }
+    size_t size() const noexcept { return fill_.size(); }
 
     const value_type& operator()(int x, int y) const
     {
