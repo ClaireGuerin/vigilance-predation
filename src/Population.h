@@ -35,9 +35,28 @@ namespace vigi {
 
             }
 
+            template <typename RENG>
+            void evolutionaryStep(const Parameter& param, RENG& reng) {
+
+                std::vector<Individual> offspring;
+
+                for (auto& ind : individuals_) {
+                    ind.reproduce(param, reng);
+
+                    for (int offs = 0; offs < ind.nOffspring_; ++offs) {
+                        Individual newIndiv = ind;
+                        newIndiv.cleanSlate();
+                        newIndiv.mutate(param, reng);
+                        offspring.push_back(newIndiv);
+                    }
+                }
+
+                individuals_ = offspring;
+            }
+
         private:
             size_t size_;
-            std::vector<vigi::Individual> individuals_;
+            std::vector<Individual> individuals_;
 
             template <typename RENG>
             std::pair< grd::Grid<double>, grd::Grid<size_t> > 
@@ -91,7 +110,7 @@ namespace vigi {
 
     Population::Population(const Parameter& param) :
         size_(param.popSize),
-        individuals_(param.popSize, vigi::Individual{param})
+        individuals_(param.popSize, Individual{param})
     {
     }
 }

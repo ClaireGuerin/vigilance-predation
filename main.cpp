@@ -36,5 +36,8 @@ int main()
 
   // EVOLUTIONARY TIME STEP
 
+  std::cout << "Reproduction...\n";
+  pop.evolutionaryStep(param, reng);
+
   return 0;
 }

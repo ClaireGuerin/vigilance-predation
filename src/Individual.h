@@ -9,6 +9,9 @@ namespace vigi {
   
   class Individual 
   {
+
+  friend class Population;
+
   public:
     explicit Individual(const Parameter& param);
 
@@ -62,6 +65,13 @@ namespace vigi {
     bool isMutant_ = false;
     bool isAlive_ = true;
     Coord coordinates_ = Coord{};
+
+    void cleanSlate() {
+      size_t nOffspring_ = 0;
+      double storage_ = 0.0;
+      bool isMutant_ = false;
+      bool isAlive_ = true;
+    }
   };
 
   Individual::Individual(const Parameter& param) : 
