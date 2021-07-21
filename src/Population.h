@@ -14,7 +14,7 @@ namespace vigi {
     {
         public:
             Population(const Parameter &);
-            size_t size() {return size_; };
+            size_t size() {return individuals_.size(); };
 
             template <typename RENG>
             void place(const Parameter & par, RENG& reng) {
@@ -36,7 +36,7 @@ namespace vigi {
             }
 
         private:
-            size_t size_;
+            // size_t size_; 
             std::vector<vigi::Individual> individuals_;
 
             template <typename RENG>

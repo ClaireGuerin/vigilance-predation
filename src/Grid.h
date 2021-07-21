@@ -21,10 +21,10 @@ namespace grd {
   public:
     using value_type = T;
 
-    // make it explicit that we are fine with the compiler-generated stuff
+    // make it explicit that we are happy with the compiler-generated stuff
     Grid(const Grid&) = default;                      // copy constructor 
     Grid(Grid&&) = default;                           // move constructor
-    Grid& operator=(const Grid&) = default;           // asignment
+    Grid& operator=(const Grid&) = default;           // assignment
     Grid& operator=(Grid&&) = default;                // move assignment 
 
     explicit Grid(const size_t edgeSize) :
