@@ -25,6 +25,8 @@ namespace vigi {
 
             std::vector<vigi::Individual> individuals() const { return individuals_; }
 
+            size_t size() const { return individuals_.size(); }
+
             template <typename RENG>
             grd::Grid<double> ecologicalStep(const Parameter& param, RENG& reng, grd::Grid<double> resources) {
 
