@@ -17,9 +17,7 @@ int main()
   auto resources = grd::Grid<double>{param.edgeSize * param.edgeSize, param.initResources};
 
   std::cout << "Placing individuals on grid...\n";
-  for (auto& ind : pop.individuals()) {
-    ind.set_random_coord(param.edgeSize * param.edgeSize, reng);
-  }
+  pop.place(param, reng);
 
   std::ofstream ofs("resources.txt"); 
   if(!ofs.is_open()) {
