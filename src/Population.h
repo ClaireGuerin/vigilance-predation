@@ -25,8 +25,6 @@ namespace vigi {
         }
       }
 
-      size_t size() const { return individuals_.size(); }
-
       template <typename RENG>
       Grid<double>& ecologicalStep(const Parameter& param, RENG& reng, const Grid<double>& resources) 
       {
@@ -70,20 +68,19 @@ namespace vigi {
       
 
       template <typename RENG>
-      std::pair< grd::Grid<double>, grd::Grid<size_t> > 
-      individualsExplore(const Parameter& param, RENG& reng) 
+      void individualsExplore(const Parameter& param, RENG& reng) 
       {
 
         // set abundance & vigilance to zero before each exploration
         vigil_abund_t reset {0.0, 0};
-        vigidance.assign(reset);
+        vigidance_.assign(reset);
 
         for (auto& ind : individuals_) {
           if (ind.isAlive_)
           {
             ind.explore(param, reng);
-            vigidance_.(ind.coordinates_).vigil += ind.vigilance_;
-            ++vigidance_.(ind.coordinates_).abund;
+            vigidance_(ind.coordinates_).vigil += ind.vigilance_;
+            ++vigidance_(ind.coordinates_).abund;
           }
         }
       }
@@ -104,7 +101,7 @@ namespace vigi {
           if (ind.isAlive_) 
           {
             // individuals gather resources
-            ind.gather( param, resources(ind.coordinates_), shares_(ind.coordinates) );
+            ind.gather( param, resources(ind.coordinates_), shares_(ind.coordinates_) );
             // individuals survive or get predated upon
             ind.survive(param, reng);
           }
