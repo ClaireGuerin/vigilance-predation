@@ -2,8 +2,14 @@
 #define VIGI_UTILS_H_INCLUDED
 
 #include <random>
+#include <algorithm>
+#include "Grid.h"
 
 namespace vigi {
+
+  // selective using directives
+  using grd::Coord;
+  using grd::Grid;
 
   struct Parameter
   {
@@ -31,13 +37,6 @@ namespace vigi {
 
   };
 
-
-  struct Coord
-  {
-    int x;
-    int y;
-  };
-
   template <typename RENG>
   Coord randomCoord(size_t edgeSize, RENG& reng)
   {
@@ -46,7 +45,7 @@ namespace vigi {
   }
 
   template <typename RENG>
-  Coord randomMove(Coord current, RENG& reng)
+  Coord randomMove(const Coord& current, RENG& reng)
   {
     auto pdist = std::uniform_int_distribution<>(-1, 1);
     return { current.x + pdist(reng), current.y + pdist(reng) };
@@ -72,15 +71,6 @@ namespace vigi {
     auto pdist = std::poisson_distribution<>(fertility);
     return pdist(reng);
   }
-
-  template <typename N>
-  N bound(N num, N min, N max) {
-    if (num > max) num = max;
-    else if (num < min) num = min;
-
-    return num;
-  }
-
 }
 
 #endif
