@@ -63,4 +63,7 @@
 # All cmake files stored in build folder
 /build/*
 
+# Output files
+resources.txt
+
 
