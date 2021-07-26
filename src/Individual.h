@@ -53,6 +53,8 @@ namespace vigi {
       nOffspring_ = randomRepro(fertility, reng);
     }
 
+    size_t offspring() const { return nOffspring_; }
+
   private:
     size_t nOffspring_ = 0;
     double vigilance_;

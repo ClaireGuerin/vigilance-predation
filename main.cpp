@@ -31,8 +31,12 @@ int main()
     exit(EXIT_FAILURE);
   }
 
-  auto pdist = std::poisson_distribution<>(param.fecundity);
+  auto pdist = std::poisson_distribution<>(param.residualFertility);
   std::cout << "Poisson: " << pdist(reng) << " " << pdist(reng) << " " << pdist(reng) << " " << pdist(reng) << " " << "\n";
+  vigi::Individual myInd {param};
+  myInd.gather(param, 5.0, 0.5);
+  myInd.reproduce(param, reng);
+  std::cout << "Reprod: " << myInd.offspring() << " " << myInd.offspring() << " " << myInd.offspring() << " " << myInd.offspring() << "\n";
 
   for (size_t gen = 0; gen < param.nGen; ++gen) {
 
