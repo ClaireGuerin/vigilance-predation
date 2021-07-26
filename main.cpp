@@ -56,7 +56,7 @@ int main()
       for (size_t step = 0; step < param.ecoTime; ++step) {
 
         std::cout << "eco time step " << step << "\n";
-        auto shares = pop.ecologicalStep(param, reng, resources);
+        auto shares = pop.ecologicalStep(param, reng, resources, ofsE, timer);
 
         // DEPLETE AND GROW RESOURCES
         // resourceConsumption = 1 - self.efficiency * shares

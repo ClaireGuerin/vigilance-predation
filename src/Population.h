@@ -4,6 +4,7 @@
 #include <utility>
 #include <vector>
 #include <random>
+#include <fstream>
 #include "Individual.h"
 #include "Utils.h"
 #include "Grid.h"
@@ -26,9 +27,9 @@ namespace vigi {
       }
 
       template <typename RENG>
-      Grid<double>& ecologicalStep(const Parameter& param, RENG& reng, const Grid<double>& resources) 
+      Grid<double>& ecologicalStep(const Parameter& param, RENG& reng, const Grid<double>& resources, std::ofstream& ofs, const size_t& ecoTime) 
       {
-        individualsExplore(param, reng);
+        individualsExplore(param, reng, ofs, ecoTime);
         individualsGatherAndSurvive(param, resources, reng);
         return shares_;
       }
@@ -76,7 +77,7 @@ namespace vigi {
       
 
       template <typename RENG>
-      void individualsExplore(const Parameter& param, RENG& reng) 
+      void individualsExplore(const Parameter& param, RENG& reng, std::ofstream& ofs, const size_t& ecoTime) 
       {
 
         // set abundance & vigilance to zero before each exploration
@@ -87,6 +88,7 @@ namespace vigi {
           if (ind.isAlive_)
           {
             ind.explore(param, reng);
+            ofs << ecoTime << " " << ind.coordinates_.x << " " << ind.coordinates_.y << " " << ind.vigilance_ << "\n";
             vigidance_(ind.coordinates_).vigil += ind.vigilance_;
             ++vigidance_(ind.coordinates_).abund;
           }
