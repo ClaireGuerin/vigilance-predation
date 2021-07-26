@@ -43,6 +43,7 @@ namespace vigi {
         for (auto& ind : individuals_)
         {
           ind.reproduce(param, reng);
+          //std::cout << "Offspring n = " << ind.offspring() << "\n";
 
           for (int offs = 0; offs < ind.nOffspring_; ++offs) 
           {
@@ -53,6 +54,8 @@ namespace vigi {
             offspring.push_back(newIndiv);
           }
         }
+
+        std::cout << "Offspring vector: " << offspring.size() << "\n";
 
         individuals_ = offspring;
       }

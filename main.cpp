@@ -31,12 +31,22 @@ int main()
     exit(EXIT_FAILURE);
   }
 
+  // TESTING REPRODUCTION
+
   auto pdist = std::poisson_distribution<>(param.residualFertility);
   std::cout << "Poisson: " << pdist(reng) << " " << pdist(reng) << " " << pdist(reng) << " " << pdist(reng) << " " << "\n";
   vigi::Individual myInd {param};
   myInd.gather(param, 5.0, 0.5);
   myInd.reproduce(param, reng);
-  std::cout << "Reprod: " << myInd.offspring() << " " << myInd.offspring() << " " << myInd.offspring() << " " << myInd.offspring() << "\n";
+  std::cout << "Reprod: " << myInd.offspring() << " ";
+  myInd.reproduce(param, reng);
+  std::cout << myInd.offspring() << " ";
+  myInd.reproduce(param, reng);
+  std::cout << myInd.offspring() << " ";
+  myInd.reproduce(param, reng);
+  std::cout << myInd.offspring() << "\n";
+
+  // SIM LOOP
 
   for (size_t gen = 0; gen < param.nGen; ++gen) {
 
@@ -65,6 +75,7 @@ int main()
           {
             resources[cell] *= param.rGrowth * (1.0 - param.eff * shares[cell]);
             //if (cell % 5 == 0) std::cout << resources[cell] << "\n";
+            if (cell % 5 == 0) std::cout << shares[cell] << "\n";
           }
 
           // write out resources
