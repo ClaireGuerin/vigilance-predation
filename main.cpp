@@ -31,6 +31,9 @@ int main()
     exit(EXIT_FAILURE);
   }
 
+  auto pdist = std::poisson_distribution<>(param.fecundity);
+  std::cout << "Poisson: " << pdist(reng) << " " << pdist(reng) << " " << pdist(reng) << " " << pdist(reng) << " " << "\n";
+
   for (size_t gen = 0; gen < param.nGen; ++gen) {
 
     if (pop.size() == 0) {
