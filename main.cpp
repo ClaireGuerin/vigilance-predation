@@ -16,11 +16,17 @@ int main()
   std::cout << "Pop size: " << pop.size() << "\n";
   auto resources = grd::Grid<double>{param.edgeSize, param.initResources};
 
-  std::cout << "Placing individuals on grid...\n";
+  std::cout << ". Placing individuals on grid...\n";
   pop.place(param, reng);
 
-  std::ofstream ofs("resources.txt"); 
-  if(!ofs.is_open()) {
+  std::ofstream ofsR("resources_out.txt"); 
+  if(!ofsR.is_open()) {
+    std::cerr << "error: unable to open resources file\n";
+    exit(EXIT_FAILURE);
+  }
+
+  std::ofstream ofsV("vigilance_out.txt"); 
+  if(!ofsV.is_open()) {
     std::cerr << "error: unable to open vigilance file\n";
     exit(EXIT_FAILURE);
   }
@@ -52,20 +58,15 @@ int main()
           }
 
           // write out resources
-          ofs << resources[cell] << " ";
+          ofsR << step << " " << cell << " " << resources[cell] << "\n";
         }
-
-        ofs << "\n";
-
       }
 
       // EVOLUTIONARY TIME STEP
 
       std::cout << "Reproduction...\n";
       pop.evolutionaryStep(param, reng);
-
-      //ofs << pop.vigilance << "\n";
-
+      ofsV << gen << " " << pop.meanVigilance() << "\n";
     }
 
   }

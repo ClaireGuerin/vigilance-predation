@@ -38,6 +38,7 @@ namespace vigi {
       {
 
         std::vector<Individual> offspring;
+        totalVigilance_ = 0.0;
 
         for (auto& ind : individuals_) 
         {
@@ -48,12 +49,15 @@ namespace vigi {
             Individual newIndiv = ind;
             newIndiv.cleanSlate();
             newIndiv.mutate(param, reng);
+            totalVigilance_ += newIndiv.vigilance_;
             offspring.push_back(newIndiv);
           }
         }
 
         individuals_ = offspring;
       }
+
+      double meanVigilance() const { return totalVigilance_ / individuals_.size(); }
 
     private:
 
@@ -65,6 +69,7 @@ namespace vigi {
       std::vector<Individual> individuals_;
       Grid<vigil_abund_t> vigidance_;
       Grid<double> shares_;
+      double totalVigilance_;
       
 
       template <typename RENG>
