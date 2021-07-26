@@ -13,19 +13,19 @@ namespace vigi {
 
   struct Parameter
   {
-    size_t edgeSize = 100;              // grid size
-    double initResources = 1.0;         // initial resources
+    size_t edgeSize = 10;              // grid size
+    double initResources = 2.0;         // initial resources
 
     size_t popSize = 100;               // population size
     size_t nGen = 5;                    // number of generations
     size_t ecoTime = 4;                 // number of ecological steps per generation
 
     double v = 1.0;                     // initial vigilance level
-    double mutRate = 0.01;              // mutation rate
+    double mutRate = 0.1;              // mutation rate
     double mutStep = 0.02;              // mutation step (deviation)
     bool bounded = true;                // is the phenotype bounded between 0 and 1?
 
-    double p = 0.2;                     // basal predation risk
+    double p = 0.3;                     // basal predation risk
 
     double eff = 0.9;                   // efficiency in resources extraction
     double competition = 1.0;           // gamma, intra-cell competition for resources
@@ -33,7 +33,7 @@ namespace vigi {
     double residualFertility = 0.0001;  // fertility cannot be zero (poisson distri), so when ind has no resources, its fertility is residual
     double fecundity = 2.0;             // basal fecundity
 
-    double rGrowth = 2.0;               // resources growth rate
+    double rGrowth = 1.1;               // resources growth rate
 
   };
 
