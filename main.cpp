@@ -20,18 +20,28 @@ int main()
   pop.place(param, reng);
 
   std::ofstream ofsR("resources_out.txt"); 
-  if(!ofsR.is_open()) {
+  if(!ofsR.is_open()) 
+  {
     std::cerr << "error: unable to open resources file\n";
     exit(EXIT_FAILURE);
   }
 
   std::ofstream ofsV("vigilance_out.txt"); 
-  if(!ofsV.is_open()) {
+  if(!ofsV.is_open()) 
+  {
+    std::cerr << "error: unable to open vigilance file\n";
+    exit(EXIT_FAILURE);
+  }
+
+  std::ofstream ofsE("exploration_out.txt");
+  if(!ofsE.is_open()) 
+  {
     std::cerr << "error: unable to open vigilance file\n";
     exit(EXIT_FAILURE);
   }
 
   // SIM LOOP
+  size_t timer = 0;
 
   for (size_t gen = 0; gen < param.nGen; ++gen) {
 
@@ -63,8 +73,10 @@ int main()
           }
 
           // write out resources
-          ofsR << step << " " << cell << " " << resources[cell] << "\n";
+          ofsR << timer << " " << cell << " " << resources[cell] << "\n";
         }
+
+        ++timer;
       }
 
       // EVOLUTIONARY TIME STEP
