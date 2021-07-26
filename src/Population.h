@@ -102,7 +102,7 @@ namespace vigi {
         for (size_t cell = 0; cell < shares_.size(); ++cell) {
           // share = SUM(1-v_i)/(gamma*n), gamma: competition parameter
           const auto& vd = vigidance_[cell];
-          shares_[cell] = (vd.abund == 0) ? 0.0 : (vd.vigil - vd.abund) / (param.competition * vd.abund);
+          shares_[cell] = (vd.abund == 0) ? 0.0 : (vd.abund - vd.vigil) / (param.competition * vd.abund);
         }
      
         for (auto& ind : individuals_) {

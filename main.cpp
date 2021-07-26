@@ -16,7 +16,7 @@ int main()
   std::cout << "Pop size: " << pop.size() << "\n";
   auto resources = grd::Grid<double>{param.edgeSize, param.initResources};
 
-  std::cout << ". Placing individuals on grid...\n";
+  std::cout << "Placing individuals on grid...\n";
   pop.place(param, reng);
 
   std::ofstream ofsR("resources_out.txt"); 
@@ -30,21 +30,6 @@ int main()
     std::cerr << "error: unable to open vigilance file\n";
     exit(EXIT_FAILURE);
   }
-
-  // TESTING REPRODUCTION
-
-  auto pdist = std::poisson_distribution<>(param.residualFertility);
-  std::cout << "Poisson: " << pdist(reng) << " " << pdist(reng) << " " << pdist(reng) << " " << pdist(reng) << " " << "\n";
-  vigi::Individual myInd {param};
-  myInd.gather(param, 5.0, 0.5);
-  myInd.reproduce(param, reng);
-  std::cout << "Reprod: " << myInd.offspring() << " ";
-  myInd.reproduce(param, reng);
-  std::cout << myInd.offspring() << " ";
-  myInd.reproduce(param, reng);
-  std::cout << myInd.offspring() << " ";
-  myInd.reproduce(param, reng);
-  std::cout << myInd.offspring() << "\n";
 
   // SIM LOOP
 
@@ -75,7 +60,6 @@ int main()
           {
             resources[cell] *= param.rGrowth * (1.0 - param.eff * shares[cell]);
             //if (cell % 5 == 0) std::cout << resources[cell] << "\n";
-            if (cell % 5 == 0) std::cout << shares[cell] << "\n";
           }
 
           // write out resources
