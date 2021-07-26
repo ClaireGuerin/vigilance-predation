@@ -55,7 +55,7 @@ int main()
           } else 
           {
             resources[cell] *= param.rGrowth * (1.0 - param.eff * shares[cell]);
-            if (cell % 7 == 0) std::cout << shares[cell] << ", " << param.rGrowth << ", " << param.eff << "\n";
+            if (cell % 5 == 0) std::cout << resources[cell] << "\n";
           }
 
           // write out resources
