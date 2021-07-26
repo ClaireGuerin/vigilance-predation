@@ -16,7 +16,7 @@ namespace vigi {
     size_t edgeSize = 10;              // grid size
     double initResources = 2.0;         // initial resources
 
-    size_t popSize = 100;               // population size
+    size_t popSize = 80;               // population size
     size_t nGen = 5;                    // number of generations
     size_t ecoTime = 4;                 // number of ecological steps per generation
 

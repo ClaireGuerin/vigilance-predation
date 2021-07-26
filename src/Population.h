@@ -40,7 +40,7 @@ namespace vigi {
         std::vector<Individual> offspring;
         totalVigilance_ = 0.0;
 
-        for (auto& ind : individuals_) 
+        for (auto& ind : individuals_)
         {
           ind.reproduce(param, reng);
 
