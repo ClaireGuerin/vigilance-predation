@@ -38,6 +38,8 @@ int main()
       break;
     } else {
 
+      std::cout << "Gen " << gen << "\n";
+
       // ECOLOGICAL TIME STEPS
       for (size_t step = 0; step < param.ecoTime; ++step) {
 
@@ -55,7 +57,7 @@ int main()
           } else 
           {
             resources[cell] *= param.rGrowth * (1.0 - param.eff * shares[cell]);
-            if (cell % 5 == 0) std::cout << resources[cell] << "\n";
+            //if (cell % 5 == 0) std::cout << resources[cell] << "\n";
           }
 
           // write out resources

@@ -30,7 +30,7 @@ namespace vigi {
     double eff = 0.9;                   // efficiency in resources extraction
     double competition = 1.0;           // gamma, intra-cell competition for resources
 
-    double residualFertility = 0.0001;  // fertility cannot be zero (poisson distri), so when ind has no resources, its fertility is residual
+    double residualFertility = 0.01;  // fertility cannot be zero (poisson distri), so when ind has no resources, its fertility is residual
     double fecundity = 2.0;             // basal fecundity
 
     double rGrowth = 1.1;               // resources growth rate
