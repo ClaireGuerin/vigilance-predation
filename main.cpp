@@ -11,6 +11,23 @@ int main()
 {
   auto param = vigi::Parameter{};
   auto reng = std::default_random_engine{};
+
+  std::vector y {param.edgeSize * param.edgeSize};
+  std::vector x {param.edgeSize * param.edgeSize};
+
+  size_t coord = 0;
+  for (int i = 0; i < y.size(); ++i) {
+    y[i] = coord;
+    if (i % param.edgeSize == 0) ++coord;
+  }
+
+  coord = 0;
+  for (int i = 0; i < y.size(); ++i) {
+    if (coord < param.edgeSize) ++coord;
+    else coord = 0;
+
+    y[i] = coord;
+  }
   
   auto pop = vigi::Population{param};
   std::cout << "Pop size: " << pop.size() << "\n";
@@ -22,7 +39,7 @@ int main()
   std::ofstream ofsR("resources_out.txt"); 
   if(!ofsR.is_open()) 
   {
-    std::cerr << "error: unable to open resources file\n";
+    std::cerr << "error: unastd::vector y {param.edgeSize * param.edgeSize};ble to open resources file\n";
     exit(EXIT_FAILURE);
   }
 
@@ -73,7 +90,7 @@ int main()
           }
 
           // write out resources
-          ofsR << timer << " " << cell << " " << resources[cell] << "\n";
+          ofsR << timer << " " << x[cell] << " " << y[cell] << " " << resources[cell] << "\n";
         }
 
         ++timer;
