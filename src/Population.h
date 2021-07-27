@@ -88,7 +88,7 @@ namespace vigi {
           if (ind.isAlive_)
           {
             ind.explore(param, reng);
-            ofs << ecoTime << " " << ind.coordinates_.x << " " << ind.coordinates_.y << " " << ind.vigilance_ << "\n";
+            ofs << ecoTime << "," << ind.coordinates_.x << "," << ind.coordinates_.y << "," << ind.vigilance_ << "\n";
             vigidance_(ind.coordinates_).vigil += ind.vigilance_;
             ++vigidance_(ind.coordinates_).abund;
           }

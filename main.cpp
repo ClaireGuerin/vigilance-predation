@@ -87,7 +87,7 @@ int main()
           }
 
           // write out resources
-          ofsR << timer << " " << x[cell] << " " << y[cell] << " " << resources[cell] << "\n";
+          ofsR << timer << "," << x[cell] << "," << y[cell] << "," << resources[cell] << "\n";
         }
 
         ++timer;
@@ -97,7 +97,7 @@ int main()
 
       std::cout << "Reproduction...\n";
       pop.evolutionaryStep(param, reng);
-      ofsV << gen << " " << pop.meanVigilance() << "\n";
+      ofsV << gen << "," << pop.meanVigilance() << "\n";
     }
 
   }
