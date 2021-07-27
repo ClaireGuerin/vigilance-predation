@@ -12,21 +12,18 @@ int main()
   auto param = vigi::Parameter{};
   auto reng = std::default_random_engine{};
 
-  std::vector y {param.edgeSize * param.edgeSize};
-  std::vector x {param.edgeSize * param.edgeSize};
+  std::vector y(param.edgeSize * param.edgeSize, 0);
+  std::vector x(param.edgeSize * param.edgeSize, 0);
 
-  size_t coord = 0;
+  size_t coordY = 0;
+  size_t coordX = 0;
   for (int i = 0; i < y.size(); ++i) {
-    y[i] = coord;
-    if (i % param.edgeSize == 0) ++coord;
-  }
+    x[i] = coordX;
+    ++coordX;
+    if (coordX == param.edgeSize) coordX = 0;
 
-  coord = 0;
-  for (int i = 0; i < y.size(); ++i) {
-    if (coord < param.edgeSize) ++coord;
-    else coord = 0;
-
-    y[i] = coord;
+    if (i > 0 && i % param.edgeSize == 0) ++coordY;
+    y[i] = coordY;
   }
   
   auto pop = vigi::Population{param};
