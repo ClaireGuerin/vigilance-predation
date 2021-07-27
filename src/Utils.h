@@ -17,8 +17,8 @@ namespace vigi {
     double initResources = 2.0;         // initial resources
 
     size_t popSize = 80;               // population size
-    size_t nGen = 5;                    // number of generations
-    size_t ecoTime = 4;                 // number of ecological steps per generation
+    size_t nGen = 100;                    // number of generations
+    size_t ecoTime = 5;                 // number of ecological steps per generation
 
     double v = 0.5;                     // initial vigilance level
     double mutRate = 0.1;              // mutation rate
@@ -27,11 +27,11 @@ namespace vigi {
 
     double p = 0.3;                     // basal predation risk
 
-    double eff = 0.6;                   // efficiency in resources extraction
-    double competition = 9.0;           // gamma, intra-cell competition for resources
+    double eff = 0.7;                   // efficiency in resources extraction
+    double competition = 20.0;           // gamma, intra-cell competition for resources
 
-    double residualFertility = 0.001;     // fertility cannot be zero (poisson distri), so when ind has no resources, its fertility is residual
-    double fecundity = 2.0;             // basal fecundity
+    double residualFertility = 0.0001;     // fertility cannot be zero (poisson distri), so when ind has no resources, its fertility is residual
+    double fecundity = 1.5;             // basal fecundity
 
     double rGrowth = 1.1;               // resources growth rate
 
