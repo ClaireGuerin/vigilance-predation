@@ -42,7 +42,7 @@ namespace grd {
     size_t size() const noexcept { return fill_.size(); }
 
     void assign(const value_type& val) 
-    { // fill the whole vector with val?
+    { // fill the whole vector with val
       std::fill(begin(), end(), val); 
     }
 
