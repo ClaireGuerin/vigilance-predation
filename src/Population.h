@@ -29,14 +29,13 @@ namespace vigi {
       }
 
       template <typename RENG>
-      Grid<double>& ecologicalStep(const Parameter& param, RENG& reng, const Grid<double>& resources, std::ofstream& ofs, const size_t& ecoTime) 
+      void ecologicalStep(const Parameter& param, RENG& reng, const Grid<double>& resources, std::ofstream& ofs, const size_t& ecoTime) 
       {
-        /* Returns the per-capita share of resources within each cell of the grid
+        /* Returns nothing
            Make individuals explore the grid, gather resources and survive
            writes out exploration data to the corresponding ofstream */
         individualsExplore(param, reng, ofs, ecoTime);
         individualsGatherAndSurvive(param, resources, reng);
-        return shares_;
       }
 
       template <typename RENG>
@@ -78,6 +77,8 @@ namespace vigi {
       }
 
       double meanVigilance() const { return totalVigilance_ / individuals_.size(); }
+
+      double share(const size_t& linCoord) const { return shares_[linCoord]; }
 
     private:
 

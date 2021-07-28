@@ -29,7 +29,6 @@ int main()
   auto pop = vigi::Population{param};
   std::cout << "Pop size: " << pop.size() << "\n";
   auto resources = grd::Grid<double>{param.edgeSize, param.initResources};
-  auto shares = grd::Grid<double>(param.edgeSize);
   
   /* auto testGrid = grd::Grid<double>(2);
   testGrid.assign(0.0);
@@ -84,7 +83,7 @@ int main()
       for (size_t step = 0; step < param.ecoTime; ++step) {
 
         std::cout << "eco time step " << step << "\n";
-        shares = pop.ecologicalStep(param, reng, resources, ofsE, timer);
+        pop.ecologicalStep(param, reng, resources, ofsE, timer);
 
         // DEPLETE AND GROW RESOURCES
         // resourceConsumption = 1 - self.efficiency * shares
@@ -96,7 +95,7 @@ int main()
             resources[cell] = param.initResources;
           } else 
           {
-            resources[cell] *= param.rGrowth * (1.0 - param.eff * shares[cell]);
+            resources[cell] *= param.rGrowth * (1.0 - param.eff * pop.share(cell));
             //if (cell % 5 == 0) std::cout << resources[cell] << "\n";
           }
 
