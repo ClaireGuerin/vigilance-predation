@@ -29,7 +29,9 @@ int main()
   auto pop = vigi::Population{param};
   std::cout << "Pop size: " << pop.size() << "\n";
   auto resources = grd::Grid<double>{param.edgeSize, param.initResources};
-  auto testGrid = grd::Grid<double>(2);
+  auto shares = grd::Grid<double>(param.edgeSize);
+  
+  /* auto testGrid = grd::Grid<double>(2);
   testGrid.assign(0.0);
   auto testGrid2 = grd::Grid<double>(2);
   testGrid2.assign(2.0);
@@ -39,7 +41,7 @@ int main()
   testGridCalc[0] = (testGrid[0] - testGrid2[0]) / (param.competition * testGrid[0]);
   testGridCalc[1] = (testGrid[1] - testGrid2[1]) / (param.competition * testGrid[1]);
 
-  std::cout << "Test " << testGrid(grd::Coord {0, 0}) << " " << testGrid(grd::Coord {1, 0}) << " " << (testGridCalc[0] == -1) << " " << (testGridCalc[1] == 1.5/3.5) << "\n";  
+  std::cout << "Test " << testGrid(grd::Coord {0, 0}) << " " << testGrid(grd::Coord {1, 0}) << " " << (testGridCalc[0] == -1) << " " << (testGridCalc[1] == 1.5/3.5) << "\n"; */ 
 
 
   std::cout << "Placing individuals on grid...\n";
@@ -82,7 +84,7 @@ int main()
       for (size_t step = 0; step < param.ecoTime; ++step) {
 
         std::cout << "eco time step " << step << "\n";
-        auto shares = pop.ecologicalStep(param, reng, resources, ofsE, timer);
+        shares = pop.ecologicalStep(param, reng, resources, ofsE, timer);
 
         // DEPLETE AND GROW RESOURCES
         // resourceConsumption = 1 - self.efficiency * shares
