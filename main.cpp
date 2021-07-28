@@ -29,6 +29,14 @@ int main()
   auto pop = vigi::Population{param};
   std::cout << "Pop size: " << pop.size() << "\n";
   auto resources = grd::Grid<double>{param.edgeSize, param.initResources};
+  auto testGrid = grd::Grid<size_t>{4, 0};
+  testGrid.assign(3);
+
+  for (auto& elem : testGrid)
+  {
+    std::cout << elem << " ";
+  }
+
 
   std::cout << "Placing individuals on grid...\n";
   pop.place(param, reng);
