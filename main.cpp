@@ -29,13 +29,12 @@ int main()
   auto pop = vigi::Population{param};
   std::cout << "Pop size: " << pop.size() << "\n";
   auto resources = grd::Grid<double>{param.edgeSize, param.initResources};
-  auto testGrid = grd::Grid<size_t>{4, 0};
-  testGrid.assign(3);
+  auto testGrid = grd::Grid<size_t>(2);
+  testGrid.assign(0);
+  ++testGrid(grd::Coord {0, 0});
+  testGrid(grd::Coord {1, 0}) += 3;
 
-  for (auto& elem : testGrid)
-  {
-    std::cout << elem << " ";
-  }
+  std::cout << "Test " << testGrid(grd::Coord {0, 0}) << " " << testGrid(grd::Coord {1, 0}) << "\n";  
 
 
   std::cout << "Placing individuals on grid...\n";
