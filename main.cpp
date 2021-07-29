@@ -49,7 +49,7 @@ int main()
   std::ofstream ofsR("resources_out.txt"); 
   if(!ofsR.is_open()) 
   {
-    std::cerr << "error: unastd::vector y {param.edgeSize * param.edgeSize};ble to open resources file\n";
+    std::cerr << "error: unable to open resources file\n";
     exit(EXIT_FAILURE);
   }
 
