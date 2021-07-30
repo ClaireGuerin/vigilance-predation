@@ -14,7 +14,7 @@ namespace grd {
     int y;
   };  
 
-  template<typename T>
+  template<typename>
   class Grid
   {
   public:

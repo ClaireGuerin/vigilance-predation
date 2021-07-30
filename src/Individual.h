@@ -49,8 +49,8 @@ namespace vigi {
 
     template <typename RENG>
     void reproduce(const Parameter& param, RENG& reng) {
-      double fertility = param.residualFertility + param.fecundity * storage_;
-      nOffspring_ = randomRepro(fertility, reng);
+      double fertility = /*param.residualFertility + */ param.fecundity * storage_;
+      nOffspring_ = fertility ? randomRepro(fertility, reng) : 0;
     }
 
     size_t offspring() const { return nOffspring_; }

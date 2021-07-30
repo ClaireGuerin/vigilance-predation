@@ -5,6 +5,7 @@
 #include <vector>
 #include <random>
 #include <fstream>
+#include <algorithm>
 #include "Individual.h"
 #include "Utils.h"
 #include "Grid.h"
@@ -50,9 +51,8 @@ namespace vigi {
            Replaces parent individuals by offspring (non-overlapping generations)
         */
 
-        std::vector<Individual> offspring;
         totalVigilance_ = 0.0;
-
+        offspring.clear();
         for (auto& ind : individuals_)
         {
           if (ind.isAlive_) 
@@ -72,8 +72,7 @@ namespace vigi {
         }
 
         std::cout << "Offspring vector: " << offspring.size() << "\n";
-
-        individuals_ = offspring;
+        individuals_.swap(offspring);
       }
 
       double meanVigilance() const { return totalVigilance_ / individuals_.size(); }
@@ -83,6 +82,7 @@ namespace vigi {
     private:
 
       std::vector<Individual> individuals_;
+      std::vector<Individual> offspring;
       Grid<double> vigilances_;
       Grid<size_t> abundances_;
       Grid<double> shares_;
@@ -131,10 +131,9 @@ namespace vigi {
         }
      
         for (auto& ind : individuals_) {
-          if (ind.isAlive_) 
-          {
+          if (ind.isAlive_) {
             // individuals gather their share of resources from the grid cell where they currently are
-            ind.gather( param, resources(ind.coordinates_), shares_(ind.coordinates_) );
+            ind.gather(param, resources(ind.coordinates_), shares_(ind.coordinates_));
             // individuals survive or get predated upon
             ind.survive(param, reng);
           }
