@@ -46,6 +46,12 @@ namespace grd {
       std::fill(begin(), end(), val); 
     }
 
+    // linear index to coordinate
+    Coord coord_of(size_t idx) const noexcept
+    {
+      return { idx % dim_, idx / dim_ };
+    }
+
     // When we feed the function with an x and y value
 
     const value_type& operator()(int x, int y) const

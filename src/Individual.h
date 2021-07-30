@@ -64,10 +64,14 @@ namespace vigi {
     Coord coordinates_ = Coord{};
 
     void cleanSlate() {
-      size_t nOffspring_ = 0;
-      double storage_ = 0.0;
-      bool isMutant_ = false;
-      bool isAlive_ = true;
+      //size_t nOffspring_ = 0;
+      //double storage_ = 0.0;
+      //bool isMutant_ = false;
+      //bool isAlive_ = true;
+      nOffspring_ = 0;
+      storage_ = 0.0;
+      isMutant_ = false;
+      isAlive_ = true;
     }
   };
 

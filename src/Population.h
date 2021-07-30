@@ -5,6 +5,8 @@
 #include <vector>
 #include <random>
 #include <fstream>
+#include <numeric>
+#include <algorithm>
 #include "Individual.h"
 #include "Utils.h"
 #include "Grid.h"
