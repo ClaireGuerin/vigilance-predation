@@ -46,8 +46,7 @@ namespace grd {
       std::fill(begin(), end(), val); 
     }
 
-    // linear index to coordinate
-    Coord coord_of(size_t idx) const noexcept
+    Coord lin_to_coord(size_t idx) const noexcept
     {
       return { idx % dim_, idx / dim_ };
     }
