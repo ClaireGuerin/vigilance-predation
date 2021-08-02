@@ -19,13 +19,13 @@ namespace vigi {
       size_t size() const {return individuals_.size(); };
 
       template <typename RENG>
-      void place(const Parameter & par, RENG& reng) 
+      void place(RENG& reng, Random& rd) 
       /* Returns nothing
          Loops over individual instances (class Individual) in the population and assign them random coordinates on the grid */
       {
         for (auto& ind : individuals_) 
         {
-          ind.set_random_coord(par.edgeSize, reng);
+          ind.set_random_coord(reng, rd);
         }
       }
 

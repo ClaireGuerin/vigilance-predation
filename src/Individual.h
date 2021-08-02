@@ -18,9 +18,9 @@ namespace vigi {
     explicit Individual(const Parameter& param);
 
     template <typename RENG>
-    void set_random_coord(size_t edgeSize, RENG& reng)
+    void set_random_coord(RENG& reng, Random& rd)
     {
-      coordinates_ = randomCoord(edgeSize, reng);
+      coordinates_ = rd.coordinate(reng);
     }
 
     template <typename RENG>

@@ -39,7 +39,7 @@ int main()
     auto resources = grd::Grid<double>{ param.edgeSize, param.initResources };
 
     std::cout << "Placing individuals on grid...\n";
-    pop.place(param, reng);
+    pop.place(reng, rd);
 
     std::ofstream ofsR("resources_out.txt");
     if (!ofsR.is_open())
