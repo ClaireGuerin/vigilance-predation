@@ -57,7 +57,7 @@ namespace vigi {
         {
           if (ind.isAlive_) 
           {
-            ind.reproduce(param, reng);
+            ind.reproduce(param, reng, rd);
             //std::cout << "Offspring n = " << ind.offspring() << "\n";
 
             for (int offs = 0; offs < ind.nOffspring_; ++offs) 

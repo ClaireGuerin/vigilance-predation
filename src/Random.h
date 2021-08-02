@@ -32,6 +32,13 @@ namespace vigi
             return pdist(reng);
         }
 
+        template <typename RENG>
+        size_t reproduction(double fertility, RENG& reng)
+        {
+            auto pdist = std::poisson_distribution<>(fertility);
+            return pdist(reng);
+        }
+
     private:
         std::normal_distribution<> normalDist_;
         std::uniform_int_distribution<> uniformEdgeDist_;

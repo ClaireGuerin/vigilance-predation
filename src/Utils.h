@@ -37,13 +37,6 @@ namespace vigi {
 
   };
 
-  template <typename RENG>
-  size_t randomRepro(double fertility, RENG& reng)
-  {
-    auto pdist = std::poisson_distribution<>(fertility);
-    return pdist(reng);
-  }
-
 }
 
 #endif
