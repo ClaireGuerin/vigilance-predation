@@ -25,7 +25,7 @@ namespace vigi {
 
     template <typename RENG>
     void mutate(const Parameter& param, RENG& reng, Random& rd) {
-      isMutant_ = randomBool(param.mutRate, reng);
+      isMutant_ = rd.boolean(param.mutRate, reng);
       if (isMutant_) {
         double deviation = rd.deviation(reng);
         double phen = vigilance_ + deviation;
@@ -41,9 +41,9 @@ namespace vigi {
     }
 
     template <typename RENG>
-    void survive(const Parameter& param, RENG& reng) {
+    void survive(const Parameter& param, RENG& reng, Random& rd) {
       double predationRisk = param.p * (1 - vigilance_); // 0 <= p <= 1 is the basal predation risk 
-      isAlive_ = randomBool((1 - predationRisk), reng);
+      isAlive_ = rd.boolean((1 - predationRisk), reng);
     }
 
     void gather(const Parameter&, double, double);

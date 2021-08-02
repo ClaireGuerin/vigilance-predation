@@ -38,13 +38,6 @@ namespace vigi {
   };
 
   template <typename RENG>
-  bool randomBool(double pTrue, RENG& reng)
-  {
-    auto pdist = std::bernoulli_distribution(pTrue);
-    return pdist(reng);
-  }
-
-  template <typename RENG>
   size_t randomRepro(double fertility, RENG& reng)
   {
     auto pdist = std::poisson_distribution<>(fertility);

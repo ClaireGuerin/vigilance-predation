@@ -36,7 +36,7 @@ namespace vigi {
            Make individuals explore the grid, gather resources and survive
            writes out exploration data to the corresponding ofstream */
         individualsExplore(param, reng, rd, ofs, ecoTime);
-        individualsGatherAndSurvive(param, resources, reng);
+        individualsGatherAndSurvive(param, resources, reng, rd);
       }
 
       template <typename RENG>
@@ -89,7 +89,11 @@ namespace vigi {
       double totalVigilance_;
       
       template <typename RENG>
-      void individualsExplore(const Parameter& param, RENG& reng, Random& rd, std::ofstream& ofs, const size_t& ecoTime) 
+      void individualsExplore(const Parameter& param, 
+                              RENG& reng, 
+                              Random& rd, 
+                              std::ofstream& ofs, 
+                              const size_t& ecoTime) 
       {
         /* Returns nothing
            Makes the ALIVE individual instances (class Individual) move on the grid
@@ -114,7 +118,8 @@ namespace vigi {
       template <typename RENG>
       void individualsGatherAndSurvive( const Parameter& param, 
                                         const grd::Grid<double>& resources,
-                                        RENG& reng) 
+                                        RENG& reng,
+                                        Random& rd) 
       {
         /* Returns nothing
            Calculates the per-capita share of resources in each grid cell based on updated vigilance and abundance
@@ -135,7 +140,7 @@ namespace vigi {
             // individuals gather their share of resources from the grid cell where they currently are
             ind.gather(param, resources(ind.coordinates_), shares_(ind.coordinates_));
             // individuals survive or get predated upon
-            ind.survive(param, reng);
+            ind.survive(param, reng, rd);
           }
         }
       }

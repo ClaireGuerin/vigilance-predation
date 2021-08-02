@@ -25,6 +25,13 @@ namespace vigi
         template <typename RENG>
         Coord move(const Coord& current, RENG& reng) { return { current.x + uniformStepDist_(reng), current.y + uniformStepDist_(reng) }; }
 
+        template <typename RENG>
+        bool boolean(double pTrue, RENG& reng)
+        {
+            auto pdist = std::bernoulli_distribution(pTrue);
+            return pdist(reng);
+        }
+
     private:
         std::normal_distribution<> normalDist_;
         std::uniform_int_distribution<> uniformEdgeDist_;
