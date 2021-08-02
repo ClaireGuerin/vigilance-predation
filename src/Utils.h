@@ -37,6 +37,7 @@ namespace vigi {
 
   };
 
+
   template <typename RENG>
   Coord randomCoord(size_t edgeSize, RENG& reng)
   {
@@ -71,6 +72,7 @@ namespace vigi {
     auto pdist = std::poisson_distribution<>(fertility);
     return pdist(reng);
   }
+
 }
 
 #endif
