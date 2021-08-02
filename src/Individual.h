@@ -54,7 +54,9 @@ namespace vigi {
       nOffspring_ = fertility ? rd.reproduction(fertility, reng) : 0;
     }
 
-    size_t offspring() const { return nOffspring_; }
+    Individual deliver();
+
+    //size_t offspring() const { return nOffspring_; }
 
   private:
     size_t nOffspring_ = 0;
@@ -64,12 +66,6 @@ namespace vigi {
     bool isAlive_ = true;
     Coord coordinates_ = Coord{};
 
-    void cleanSlate() {
-      nOffspring_ = 0;
-      storage_ = 0.0;
-      isMutant_ = false;
-      isAlive_ = true;
-    }
   };
 
   Individual::Individual(const Parameter& param) : 
@@ -79,6 +75,17 @@ namespace vigi {
 
   void Individual::gather(const Parameter& param, double resources, double share) {
     storage_ += param.eff * resources * share; 
+  }
+
+  Individual Individual::deliver() 
+  {
+    Individual offsp = *this;
+    offsp.nOffspring_ = 0;
+    offsp.storage_ = 0;
+    offsp.isMutant_ = false;
+    offsp.isAlive_ = true;
+
+    return offsp;
   }
 
 }

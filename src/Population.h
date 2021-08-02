@@ -62,8 +62,7 @@ namespace vigi {
 
             for (int offs = 0; offs < ind.nOffspring_; ++offs) 
             {
-              Individual newIndiv = ind;
-              newIndiv.cleanSlate();
+              Individual newIndiv = ind.deliver();
               newIndiv.mutate(param, reng, rd);
               totalVigilance_ += newIndiv.vigilance_;
               offspring.push_back(newIndiv);
