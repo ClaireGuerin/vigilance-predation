@@ -15,7 +15,8 @@ namespace vigi {
   class Population 
   {
     public:
-      Population(const Parameter &);
+      explicit Population(const Parameter &);
+      
       size_t size() const {return individuals_.size(); };
 
       template <typename RENG>

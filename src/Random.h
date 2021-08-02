@@ -9,12 +9,7 @@ namespace vigi
     class Random
     {
     public:
-        Random(const Parameter &par) :
-        normalDist_ (0.0, par.mutStep),
-        uniformEdgeDist_ (0, static_cast<int>(par.edgeSize) - 1),
-        uniformStepDist_ (-1, 1)
-        {
-        }
+        explicit Random(const Parameter&);
 
         template <typename RENG>
         double deviation(RENG & reng) { return normalDist_(reng); }
@@ -45,6 +40,12 @@ namespace vigi
         std::uniform_int_distribution<> uniformStepDist_;
     };    
 
+    Random::Random(const Parameter &par) :
+        normalDist_ (0.0, par.mutStep),
+        uniformEdgeDist_ (0, static_cast<int>(par.edgeSize) - 1),
+        uniformStepDist_ (-1, 1)
+    {
+    }
 }
 
 #endif
