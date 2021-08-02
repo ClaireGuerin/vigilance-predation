@@ -71,7 +71,7 @@ int main()
       for (size_t step = 0; step < param.ecoTime; ++step, ++timer) {
 
         std::cout << "eco time step " << step << "\n";
-        pop.ecologicalStep(param, reng, resources, ofsE, timer);
+        pop.ecologicalStep(param, reng, rd, resources, ofsE, timer);
 
         // DEPLETE AND GROW RESOURCES
         // resourceConsumption = 1 - self.efficiency * shares

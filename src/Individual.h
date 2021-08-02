@@ -34,8 +34,8 @@ namespace vigi {
     }
 
     template <typename RENG>
-    void explore(const Parameter& param, RENG& reng) {
-        Coord unbounded = randomMove(coordinates_, reng);
+    void explore(const Parameter& param, RENG& reng, Random& rd) {
+        Coord unbounded = rd.move(coordinates_, reng);
         coordinates_ = {  std::clamp(unbounded.x, 0, static_cast<int>(param.edgeSize) - 1), 
                           std::clamp(unbounded.y, 0, static_cast<int>(param.edgeSize) - 1) };
     }

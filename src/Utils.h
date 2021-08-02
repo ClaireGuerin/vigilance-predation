@@ -37,21 +37,6 @@ namespace vigi {
 
   };
 
-
-  template <typename RENG>
-  Coord randomCoord(size_t edgeSize, RENG& reng)
-  {
-    auto pdist = std::uniform_int_distribution<>(0, static_cast<int>(edgeSize) - 1);
-    return { pdist(reng), pdist(reng) };
-  }
-
-  template <typename RENG>
-  Coord randomMove(const Coord& current, RENG& reng)
-  {
-    auto pdist = std::uniform_int_distribution<>(-1, 1);
-    return { current.x + pdist(reng), current.y + pdist(reng) };
-  }
-
   template <typename RENG>
   bool randomBool(double pTrue, RENG& reng)
   {
