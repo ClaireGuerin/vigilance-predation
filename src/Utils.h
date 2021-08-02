@@ -23,7 +23,6 @@ namespace vigi {
     double v = 0.5;                     // initial vigilance level
     double mutRate = 0.1;              // mutation rate
     double mutStep = 0.02;              // mutation step (deviation)
-    bool bounded = true;                // is the phenotype bounded between 0 and 1?
 
     double p = 0.3;                     // basal predation risk
 
@@ -34,6 +33,7 @@ namespace vigi {
     double fecundity = 2.0;             // basal fecundity
 
     double rGrowth = 1.1;               // resources growth rate
+    double maxGrowth = 200.0;           // resources max growth
 
   };
 
@@ -56,13 +56,6 @@ namespace vigi {
   bool randomBool(double pTrue, RENG& reng)
   {
     auto pdist = std::bernoulli_distribution(pTrue);
-    return pdist(reng);
-  }
-
-  template <typename RENG>
-  double randomDev(double mutationStep, RENG& reng)
-  {
-    auto pdist = std::normal_distribution<>(0, mutationStep);
     return pdist(reng);
   }
 

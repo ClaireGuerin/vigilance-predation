@@ -4,6 +4,7 @@
 #include <vector>
 #include <algorithm>
 #include "Utils.h"
+#include "Random.h"
 
 namespace vigi {
 
@@ -23,12 +24,12 @@ namespace vigi {
     }
 
     template <typename RENG>
-    void mutate(const Parameter& param, RENG& reng) {
+    void mutate(const Parameter& param, RENG& reng, Random& rd) {
       isMutant_ = randomBool(param.mutRate, reng);
       if (isMutant_) {
-        double deviation = randomDev(param.mutStep, reng);
+        double deviation = rd.deviation(reng);
         double phen = vigilance_ + deviation;
-        vigilance_ = (param.bounded) ? std::clamp(phen, 0.0, 1.0) : phen;
+        vigilance_ = std::clamp(phen, 0.0, 1.0);
       }
     }
 

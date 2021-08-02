@@ -3,16 +3,22 @@
 #include <vector>
 #include <random>
 #include <fstream>
+#include <cassert>
 #include "src/Utils.h"
 #include "src/Individual.h"
 #include "src/Grid.h"
 #include "src/Population.h"
+#include "src/Random.h"
 
 int main() 
 {
   try {
     auto param = vigi::Parameter{};
     auto reng = std::default_random_engine{};
+
+    vigi::Random rd{ param};
+
+    assert(param.v >= 0.0 && param.v <= 1.0);
 
     std::vector<int> y(param.edgeSize * param.edgeSize, 0);
     std::vector<int> x(param.edgeSize * param.edgeSize, 0);
@@ -72,7 +78,7 @@ int main()
         // resourceGrowth = self.grid.resources * self.growth
         // limit growth of resources arbitrarily set to 200 / fecundity
         for (size_t cell = 0; cell < resources.size(); ++cell) {
-          if (resources[cell] > (200 / param.fecundity))
+          if (resources[cell] > (param.maxGrowth / param.fecundity))
           {
             resources[cell] = param.initResources;
           }
@@ -89,7 +95,7 @@ int main()
         // EVOLUTIONARY TIME STEP
 
         std::cout << "Reproduction...\n";
-        pop.evolutionaryStep(param, reng);
+        pop.evolutionaryStep(param, reng, rd);
         ofsV << gen << "," << pop.meanVigilance() << "\n";
       }
     }

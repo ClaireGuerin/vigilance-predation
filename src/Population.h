@@ -40,7 +40,7 @@ namespace vigi {
       }
 
       template <typename RENG>
-      void evolutionaryStep(const Parameter& param, RENG& reng) 
+      void evolutionaryStep(const Parameter& param, RENG& reng, Random& rd) 
       {
         /* Returns nothing
            Makes ALIVE individual instances (class Individual) in the population reproduce
@@ -64,7 +64,7 @@ namespace vigi {
             {
               Individual newIndiv = ind;
               newIndiv.cleanSlate();
-              newIndiv.mutate(param, reng);
+              newIndiv.mutate(param, reng, rd);
               totalVigilance_ += newIndiv.vigilance_;
               offspring.push_back(newIndiv);
             }
