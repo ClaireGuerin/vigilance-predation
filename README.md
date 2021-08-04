@@ -73,7 +73,6 @@ Change parameter values in `Parameters.h`.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-Please make sure to update and write tests for each contribution using pytest, and to place them in the test folder. Run tests locally with `python -m pytest`. Note that this code is also tested remotely on Travis CI.
 
 ## Authors and acknowledgements
 General description of the model by Hanno Hildenbrandt.
