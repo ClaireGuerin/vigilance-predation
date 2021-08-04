@@ -15,6 +15,7 @@ namespace vigi {
   class Population 
   {
     public:
+      
       explicit Population(const Parameter &);
       
       size_t size() const {return individuals_.size(); };
@@ -153,6 +154,7 @@ namespace vigi {
       shares_(param.edgeSize)
     {
     }
+
 }
 
 #endif

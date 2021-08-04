@@ -34,7 +34,9 @@ namespace vigi
     Simulation::Simulation(std::string path) :
         dir_(path),
         param_(),
-        reng_()
+        reng_(),
+        population_(param_),
+        resources_(param_.edgeSize, param_.initResources)
     {
         assert(param_.v >= 0.0 && param_.v <= 1.0);
     }
@@ -42,9 +44,7 @@ namespace vigi
     void Simulation::setup() 
     {
         Random rd{ param_ };
-        population_(param_);
         std::cout << "Pop size: " << population_.size() << "\n";
-        resources_( param_.edgeSize, param_.initResources );
     }
 }
 
