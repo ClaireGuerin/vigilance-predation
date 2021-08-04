@@ -5,6 +5,8 @@
 #include <iostream>
 #include <random>
 #include <cassert>
+#include <vector>
+#include <string>
 #include "Utils.h"
 #include "Random.h"
 #include "Population.h"
@@ -18,9 +20,9 @@ namespace vigi
 
             void setup();
 
-            void run(std::ofstream&, std::ofstream&, std::ofstream&);
+            void run();
 
-            void save();
+            void save(std::ofstream&, std::ofstream&, std::ofstream&);
 
         private:
             std::string dir_;
@@ -29,6 +31,12 @@ namespace vigi
             Random rd_;
             Population population_;
             Grid<double> resources_;
+            std::vector<std::string> resources_out_;
+            std::vector<std::string> vigilance_out_;
+            std::vector<std::string> exploration_out_;
+
+            void write(std::vector<std::string>, std::ofstream&);
+
 
     };
 
@@ -39,6 +47,9 @@ namespace vigi
         population_(param_),
         resources_(param_.edgeSize, param_.initResources),
         rd_(param_)
+        //resources_out_(param_.nGen * param_.ecoTime * param_.edgeSize * param_.edgeSize), // huge memory allocation!!!
+        //vigilance_out_(param_.nGen),
+        //exploration_out_() // size unknown yet since population changes
     {
         assert(param_.v >= 0.0 && param_.v <= 1.0);
     }
@@ -49,7 +60,7 @@ namespace vigi
         population_.place(reng_, rd_);
     }
 
-    void Simulation::run(std::ofstream& ofsR, std::ofstream& ofsE, std::ofstream& ofsV)
+    void Simulation::run()
     {
         // SIM LOOP
         size_t timer = 0;
@@ -63,7 +74,8 @@ namespace vigi
             {
 
                 std::cout << "eco time step " << step << "\n";
-                population_.ecologicalStep(param_, reng_, rd_, resources_, ofsE, timer);
+                auto explor_str = population_.ecologicalStep(param_, reng_, rd_, resources_, timer);
+                exploration_out_.push_back(explor_str);
 
                 // DEPLETE AND GROW RESOURCES
                 // resourceConsumption = 1 - self.efficiency * shares
@@ -81,22 +93,40 @@ namespace vigi
                         //if (cell % 5 == 0) std::cout << resources[cell] << "\n";
                     }
 
-                    // write out resources
-                    ofsR    << timer << "," 
-                            << resources_.lin_to_coord(cell).x << "," 
-                            << resources_.lin_to_coord(cell).y << "," 
-                            << resources_[cell] << "\n";
+                    // write out resources into vector
+                    resources_out_.push_back(   std::to_string(timer) + "," +
+                                                std::to_string(resources_.lin_to_coord(cell).x) + "," +
+                                                std::to_string(resources_.lin_to_coord(cell).y) + "," +
+                                                std::to_string(resources_[cell]));
                 }
 
                 // EVOLUTIONARY TIME STEP
 
                 std::cout << "Reproduction...\n";
                 population_.evolutionaryStep(param_, reng_, rd_);
-                ofsV << gen << "," << population_.meanVigilance() << "\n";
+
+                vigilance_out_.push_back(   std::to_string(gen) + "," + 
+                                            std::to_string( population_.meanVigilance() ));
             }
         }
 
         if (population_.size() == 0) std::cout << "Extinction, how sad\n";
+    }
+
+    void Simulation::save(std::ofstream& ofsR, std::ofstream& ofsV, std::ofstream& ofsE) 
+    {
+        write(resources_out_, ofsR);
+        write(vigilance_out_, ofsV);
+        write(exploration_out_, ofsE);
+    }
+
+    void Simulation::write(std::vector<std::string> v, std::ofstream& ofs)
+    {
+	    for(int i=0; i<v.size(); ++i)
+        {
+		    ofs << v[i] << std::endl;
+	    }
+	    ofs.close();
     }
 }
 

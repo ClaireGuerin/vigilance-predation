@@ -31,7 +31,8 @@ int main()
 
     vigi::Simulation sim("build/");
     sim.setup();
-    sim.run(ofsR, ofsE, ofsV);
+    sim.run();
+    sim.save(ofsR, ofsV, ofsE);
     
     return 0;
   }

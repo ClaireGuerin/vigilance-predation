@@ -32,13 +32,15 @@ namespace vigi {
       }
 
       template <typename RENG>
-      void ecologicalStep(const Parameter& param, RENG& reng, Random& rd, const Grid<double>& resources, std::ofstream& ofs, const size_t& ecoTime) 
+      std::string ecologicalStep(const Parameter& param, RENG& reng, Random& rd, const Grid<double>& resources, const size_t& ecoTime)
       {
-        /* Returns nothing
+        /* Returns string of exploration output
            Make individuals explore the grid, gather resources and survive
            writes out exploration data to the corresponding ofstream */
-        individualsExplore(param, reng, rd, ofs, ecoTime);
+        individualsExplore(param, reng, rd, ecoTime);
         individualsGatherAndSurvive(param, resources, reng, rd);
+
+        return explore_string_;
       }
 
       template <typename RENG>
@@ -88,13 +90,13 @@ namespace vigi {
       Grid<size_t> abundances_;
       Grid<double> shares_;
       double totalVigilance_;
+      std::string explore_string_ = "";
       
       template <typename RENG>
       void individualsExplore(const Parameter& param, 
                               RENG& reng, 
                               Random& rd, 
-                              std::ofstream& ofs, 
-                              const size_t& ecoTime) 
+                              const size_t& ecoTime)
       {
         /* Returns nothing
            Makes the ALIVE individual instances (class Individual) move on the grid
@@ -109,7 +111,10 @@ namespace vigi {
           if (ind.isAlive_)
           {
             ind.explore(param, reng, rd); // new individual coordinates
-            ofs << ecoTime << "," << ind.coordinates_.x << "," << ind.coordinates_.y << "," << ind.vigilance_ << "\n";
+            explore_string_ = std::to_string(ecoTime) + "," +
+                              std::to_string(ind.coordinates_.x) + "," +
+                              std::to_string(ind.coordinates_.y) + "," +
+                              std::to_string(ind.vigilance_);
             vigilances_(ind.coordinates_) += ind.vigilance_; // Is this a copy???
             ++abundances_(ind.coordinates_); // Is this a copy???
           }
