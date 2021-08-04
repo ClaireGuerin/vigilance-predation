@@ -48,7 +48,9 @@ namespace grd {
 
     Coord lin_to_coord(size_t idx) const noexcept
     {
-      return { idx % dim_, idx / dim_ };
+      int idxInt = static_cast<int>(idx);
+      int dimInt = static_cast<int>(dim_);
+      return { idxInt % dimInt, idxInt / dimInt };
     }
 
     // When we feed the function with an x and y value
