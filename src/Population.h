@@ -32,16 +32,16 @@ namespace vigi {
       }
 
       template <typename RENG>
-      std::string ecologicalStep(const Parameter& param, RENG& reng, Random& rd, const Grid<double>& resources, const size_t& ecoTime)
+      void ecologicalStep(const Parameter& param, RENG& reng, Random& rd, const Grid<double>& resources, const size_t& ecoTime)
       {
         /* Returns string of exploration output
            Make individuals explore the grid, gather resources and survive
            writes out exploration data to the corresponding ofstream */
         individualsExplore(param, reng, rd, ecoTime);
         individualsGatherAndSurvive(param, resources, reng, rd);
-
-        return explore_string_;
       }
+
+      std::vector<std::string> getExplorationData() const {return explore_data_; }
 
       template <typename RENG>
       void evolutionaryStep(const Parameter& param, RENG& reng, Random& rd) 
@@ -90,7 +90,7 @@ namespace vigi {
       Grid<size_t> abundances_;
       Grid<double> shares_;
       double totalVigilance_;
-      std::string explore_string_ = "";
+      std::vector<std::string> explore_data_;
       
       template <typename RENG>
       void individualsExplore(const Parameter& param, 
@@ -111,10 +111,10 @@ namespace vigi {
           if (ind.isAlive_)
           {
             ind.explore(param, reng, rd); // new individual coordinates
-            explore_string_ = std::to_string(ecoTime) + "," +
-                              std::to_string(ind.coordinates_.x) + "," +
-                              std::to_string(ind.coordinates_.y) + "," +
-                              std::to_string(ind.vigilance_);
+            explore_data_.push_back(std::to_string(ecoTime) + "," +
+                                    std::to_string(ind.coordinates_.x) + "," +
+                                    std::to_string(ind.coordinates_.y) + "," +
+                                    std::to_string(ind.vigilance_) );
             vigilances_(ind.coordinates_) += ind.vigilance_; // Is this a copy???
             ++abundances_(ind.coordinates_); // Is this a copy???
           }

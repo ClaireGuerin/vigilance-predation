@@ -74,8 +74,9 @@ namespace vigi
             {
 
                 std::cout << "eco time step " << step << "\n";
-                auto explor_str = population_.ecologicalStep(param_, reng_, rd_, resources_, timer);
-                exploration_out_.push_back(explor_str);
+                population_.ecologicalStep(param_, reng_, rd_, resources_, timer);
+                auto explor_dat = population_.getExplorationData();
+                exploration_out_.insert(std::end(exploration_out_), std::begin(explor_dat), std::end(explor_dat));
 
                 // DEPLETE AND GROW RESOURCES
                 // resourceConsumption = 1 - self.efficiency * shares
