@@ -2,14 +2,33 @@
 #include <iostream>
 //#include <vector>
 //#include <random>
+#include <cstdlib>
 #include <fstream>
 #include "src/Simulation.h"
 
-int main() 
+std::string path = "gibberish/"; // default
+bool visual = false; // default
+
+void readCommandLine(char* argv[], int pos)
+{
+  std::string argName = argv[pos];
+  if ( argName.compare("-f") ) path = argv[pos + 1];
+  else if ( argName.compare("-v") ) 
+  {
+    visual = static_cast<bool>(argv[pos + 1]);
+  }
+}
+
+int main(int argc, char* argv[]) 
 {
   try 
   {
-    std::string path = "some-data/";
+
+    if (argc > 1)
+    {
+      readCommandLine(argv, 1);
+      if (argc > 3) readCommandLine(argv, 3);
+    }
 
     std::ofstream ofsR(path + "resources_out.txt");
     if (!ofsR.is_open())
