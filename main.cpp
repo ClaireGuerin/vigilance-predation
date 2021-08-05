@@ -1,36 +1,53 @@
+#include <stdexcept>
 #include <iostream>
-#include <vector>
-#include <random>
-#include "src/Utils.h"
-#include "src/Individual.h"
-#include "src/Grid.h"
-#include "src/Population.h"
+//#include <vector>
+//#include <random>
+#include <fstream>
+#include "src/Simulation.h"
 
 int main() 
 {
-  auto param = vigi::Parameter{};
-  auto reng = std::default_random_engine{};
-  
-  auto pop = vigi::Population{param};
-  std::cout << "Pop size: " << pop.size() << "\n";
-  auto resources = vigi::Grid<double>{param.edgeSize, param.initResources};
+  try 
+  {
+    std::string path = "some-data/";
 
-  std::cout << "Placing individuals on grid...\n";
-  for (auto& ind : pop.individuals()) {
-    ind.set_random_coord(param.edgeSize, reng);
-  }
-
-  // ECOLOGICAL TIME STEPS
-  for (size_t step = 0; step < param.ecoTime; ++step) {
-    std::cout << "eco time step " << step << "\n";
-    auto shares = pop.ecologicalStep(param, reng, resources);
-    // deplete and grow resources accordingly
-    for (size_t cell = 0; cell < resources.size(); ++cell) {
-      resources[cell] *= param.rGrowth * (1.0 - param.eff * shares[cell]);
+    std::ofstream ofsR(path + "resources_out.txt");
+    if (!ofsR.is_open())
+    {
+      throw std::runtime_error("unable to open resources file");
     }
+
+    std::ofstream ofsV(path + "vigilance_out.txt");
+    if (!ofsV.is_open())
+    {
+      std::cerr << "error: unable to open vigilance file\n";
+      exit(EXIT_FAILURE);
+    }
+
+    std::ofstream ofsE(path + "exploration_out.txt");
+    if (!ofsE.is_open())
+    {
+      std::cerr << "error: unable to open vigilance file\n";
+      exit(EXIT_FAILURE);
+    }
+
+    vigi::Simulation sim(path);
+    sim.setup();
+    sim.run();
+    sim.save(ofsR, ofsV, ofsE);
+    
+    return 0;
+  }
+  
+  catch (const std::exception& err) 
+  {
+    std::cerr << "Exception: " << err.what() << '\n';
   }
 
-  // EVOLUTIONARY TIME STEP
-
-  return 0;
+  catch (...) 
+  {
+    std::cerr << "Unknown exception\n";
+  }
+  
+  return -1;
 }

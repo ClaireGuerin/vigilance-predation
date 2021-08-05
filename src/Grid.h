@@ -4,17 +4,15 @@
 #include <vector>
 #include <algorithm>
 #include <cassert>
-
+#include "Parameters.h"
 
 namespace grd {
-
 
   struct Coord
   {
     int x;
     int y;
-  };
-
+  };  
 
   template<typename T>
   class Grid
@@ -44,10 +42,19 @@ namespace grd {
     size_t size() const noexcept { return fill_.size(); }
 
     void assign(const value_type& val) 
-    { 
+    { // fill the whole vector with val
       std::fill(begin(), end(), val); 
     }
-    
+
+    Coord lin_to_coord(size_t idx) const noexcept
+    {
+      int idxInt = static_cast<int>(idx);
+      int dimInt = static_cast<int>(dim_);
+      return { idxInt % dimInt, idxInt / dimInt };
+    }
+
+    // When we feed the function with an x and y value
+
     const value_type& operator()(int x, int y) const
     {
       assert((x >= 0) && (x < dim_) && (y >= 0) && (y < dim_));
@@ -60,11 +67,13 @@ namespace grd {
       return fill_[dim_ * y + x];   // row-major, we are in C/C++ ;)
     }
 
+    // when we feed the function directly with coordinates
+
     const value_type& operator()(const Coord& coor) const 
     { 
       return this->operator()(coor.x, coor.y); 
     }
-    
+
     value_type& operator()(const Coord& coor) 
     { 
       return this->operator()(coor.x, coor.y); 
@@ -86,7 +95,7 @@ namespace grd {
 
   private:
     size_t dim_;
-    std::vector<T> fill_;
+    std::vector<value_type> fill_;
   };
 }
 
