@@ -1,5 +1,5 @@
-#ifndef VIGI_UTILS_H_INCLUDED
-#define VIGI_UTILS_H_INCLUDED
+#ifndef VIGI_PARAMETERS_H_INCLUDED
+#define VIGI_PARAMETERS_H_INCLUDED
 
 #include <random>
 #include <algorithm>
@@ -34,6 +34,8 @@ namespace vigi {
 
     double rGrowth = 1.1;               // resources growth rate
     double maxGrowth = 200.0;           // resources max growth
+
+    unsigned rdSeed = 3;                // random seed for the simulation
 
   };
 

@@ -7,7 +7,7 @@
 #include <fstream>
 #include <algorithm>
 #include "Individual.h"
-#include "Utils.h"
+#include "Parameters.h"
 #include "Grid.h"
 
 namespace vigi {

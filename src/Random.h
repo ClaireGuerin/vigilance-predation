@@ -2,7 +2,7 @@
 #define VIGI_RANDOM_H_INCLUDED
 
 #include <random>
-#include "Utils.h"
+#include "Parameters.h"
 
 namespace vigi 
 {

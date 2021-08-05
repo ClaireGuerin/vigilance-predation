@@ -4,10 +4,11 @@
 #include <string>
 #include <iostream>
 #include <random>
+//#include <srand>
 #include <cassert>
 #include <vector>
 #include <string>
-#include "Utils.h"
+#include "Parameters.h"
 #include "Random.h"
 #include "Population.h"
 
@@ -56,6 +57,7 @@ namespace vigi
 
     void Simulation::setup() 
     {
+        srand(param_.rdSeed);
         std::cout << "Placing " << population_.size() << " individuals on grid...\n";
         population_.place(reng_, rd_);
     }
