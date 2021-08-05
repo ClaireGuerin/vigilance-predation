@@ -5,7 +5,6 @@
 #include <iostream>
 #include <random>
 //#include <srand>
-#include <cassert>
 #include <vector>
 #include <string>
 #include "Parameters.h"
@@ -43,7 +42,7 @@ namespace vigi
 
     Simulation::Simulation(std::string path) :
         dir_(path),
-        param_(),
+        param_(path),
         reng_(),
         population_(param_),
         resources_(param_.edgeSize, param_.initResources),
@@ -52,7 +51,6 @@ namespace vigi
         //vigilance_out_(param_.nGen),
         //exploration_out_() // size unknown yet since population changes
     {
-        assert(param_.v >= 0.0 && param_.v <= 1.0);
     }
 
     void Simulation::setup() 
