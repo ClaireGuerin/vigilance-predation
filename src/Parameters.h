@@ -39,6 +39,8 @@ namespace vigi {
 
     unsigned rdSeed;          // random seed for the simulation
 
+    bool visual;              // Launch visualization automatically?
+
     explicit Parameter(std::string);
 
   };
@@ -76,6 +78,7 @@ namespace vigi {
         else if (input == "rGrowth") ifs >> rGrowth;
         else if (input == "maxGrowth") ifs >> maxGrowth;
         else if (input == "rdSeed") ifs >> rdSeed;
+        else if (input == "visual") ifs >> visual;
         else throw std::runtime_error(input + " is not a valid parameter.\n");
       }
 
