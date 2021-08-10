@@ -42,15 +42,21 @@ int main(int argc, char* argv[])
     sim.run();
     sim.save(ofsR, ofsV, ofsE);
 
-    if (sim.vis()) {
+    if (sim.vis()) 
+    {
+
       struct stat info;
 
       if( stat( "anim-vigil/", &info ) != 0 )
         throw std::runtime_error("cannot access " + pathname + "\n");
       else if( info.st_mode & S_IFDIR )
-        throw std::runtime_error(pathname + " is a directory\n");
-      else
+      {
+        system("Rscript anim-vigil/animate_sim.r");
+			  system("xdg-open output/vigilance_out.gif");
+			  system("xdg-open output/grid_out.gif");
+      } else
         throw std::runtime_error(pathname + " is no directory\n");
+    
     }
 
     
