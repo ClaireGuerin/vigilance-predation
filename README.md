@@ -37,7 +37,7 @@ This code was developped under Linux (Ubuntu 20.04.2 LTS) with C++ 20.
 
 ## Usage
 
-Coming soon!
+After building, run the executable from command line, with the path to the folder where yous `parameters.txt` file is. This will also be the folder where the output will be saved. If `visual` is `1` in parameters, make sure to download [this repository](https://github.com/ClaireGuerin/anim-vigil) in the root of the program first.
 
 ### Parameters
 Change parameter values in `Parameters.h`.
@@ -73,10 +73,10 @@ Change parameter values in `Parameters.h`.
 > `fecundity` the individual fecundity, e.g. `1.5`.
 >
 > `rdSeed` the random seed to launch the simulation, for reproducibility, e.g. `1`.
+>
+> `visual` boolean, whether you want to automatically launch visual, `0` for false and `1` for true.
 
 ## Roadmap
-
-- vizualization
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
