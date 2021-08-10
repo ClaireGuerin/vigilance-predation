@@ -63,4 +63,6 @@
 # All cmake files stored in build folder
 /build/*
 
+# Folder where I store data
+/some-data/*
 

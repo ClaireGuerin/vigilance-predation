@@ -1,40 +1,78 @@
+#include <stdexcept>
 #include <iostream>
-#include <vector>
-#include <random>
-#include "src/Utils.h"
-#include "src/Individual.h"
-#include "src/Grid.h"
-#include "src/Population.h"
+//#include <vector>
+//#include <random>
+#include <string>
+#include <cstdlib>
+#include <fstream>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include "src/Simulation.h"
 
-int main() 
+int main(int argc, char* argv[]) 
 {
-  auto param = vigi::Parameter{};
-  auto reng = std::default_random_engine{};
-  
-  auto pop = vigi::Population{param};
-  std::cout << "Pop size: " << pop.size() << "\n";
-  auto resources = grd::Grid<double>{param.edgeSize * param.edgeSize, param.initResources};
+  try 
+  {
 
-  std::cout << "Placing individuals on grid...\n";
-  for (auto& ind : pop.individuals()) {
-    ind.set_random_coord(param.edgeSize * param.edgeSize, reng);
-    vigi::Coord c = ind.coordinates();
-  }
+    std::string pathname = "some-data/"; // default
+    if (argc > 1) pathname = argv[1];
 
-  // ECOLOGICAL TIME STEPS
-  for (size_t step = 0; step < param.ecoTime; ++step) {
-    std::cout << "eco time step " << step << "\n";
-    auto shares = pop.ecologicalStep(param, reng, resources);
-    // deplete and grow resources accordingly
-    // resourceConsumption = 1 - self.efficiency * shares
-    // resourceGrowth = self.grid.resources * self.growth
-    for (size_t cell = 0; cell < (param.edgeSize * param.edgeSize); ++cell) {
-      resources.write(cell, 
-                      resources.read(cell) * param.rGrowth * (1 - param.eff * shares.read(cell)));
+    std::ofstream ofsR(pathname + "resources_out.txt");
+    if (!ofsR.is_open())
+    {
+      throw std::runtime_error("unable to open resources file");
     }
+
+    std::ofstream ofsV(pathname + "vigilance_out.txt");
+    if (!ofsV.is_open())
+    {
+      std::cerr << "error: unable to open vigilance file\n";
+      exit(EXIT_FAILURE);
+    }
+
+    std::ofstream ofsE(pathname + "exploration_out.txt");
+    if (!ofsE.is_open())
+    {
+      std::cerr << "error: unable to open vigilance file\n";
+      exit(EXIT_FAILURE);
+    }
+
+    vigi::Simulation sim(pathname);
+    sim.setup();
+    sim.run();
+    sim.save(ofsR, ofsV, ofsE);
+
+    if (sim.vis()) 
+    {
+
+      struct stat info;
+
+      if( stat( "anim-vigil/", &info ) != 0 )
+        throw std::runtime_error("cannot access " + pathname + "\n");
+      else if( info.st_mode & S_IFDIR )
+      {
+        system("Rscript anim-vigil/animate_sim.r");
+			  system("xdg-open output/vigilance_out.gif");
+			  system("xdg-open output/grid_out.gif");
+      } else
+        throw std::runtime_error(pathname + " is no directory\n");
+    
+    }
+
+    
+    
+    return 0;
+  }
+  
+  catch (const std::exception& err) 
+  {
+    std::cerr << "Exception: " << err.what() << '\n';
   }
 
-  // EVOLUTIONARY TIME STEP
-
-  return 0;
+  catch (...) 
+  {
+    std::cerr << "Unknown exception\n";
+  }
+  
+  return -1;
 }

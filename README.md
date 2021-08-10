@@ -3,7 +3,11 @@ Coding challenge assigned by Hanno Hildenbrandt for a programmer position at RUG
 
 ## Visual
 
-Coming soon!
+
+Exploration                  | Trait evolution
+:---------------------------:|:----------------------------:
+![eanim](gifs/ecosystem.gif) | ![vanim](gifs/vigilance.gif)
+
 
 ## Model description
 
@@ -37,39 +41,46 @@ This code was developped under Linux (Ubuntu 20.04.2 LTS) with C++ 20.
 
 ## Usage
 
-Coming soon!
+After building, run the executable from command line, with the path to the folder where yous `parameters.txt` file is. This will also be the folder where the output will be saved. If `visual` is `1` in parameters, make sure to download [this repository](https://github.com/ClaireGuerin/anim-vigil) in the root of the program first.
 
 ### Parameters
 Change parameter values in `Parameters.h`.
 
-> `gridSize` the length of one square ecosystem grid side, e.g. `10`.
+> `edgeSize` the length of one square ecosystem grid side, e.g. `10`.
 > 
-> `nIndiv` the number of individuals at the beginning of each generation, e.g. `20`.
+> `popSize` the number of individuals at the beginning of each generation, e.g. `20`.
 > 
 > `nGen` the number of generations to run the simulation for, e.g. `300`.
 > 
-> `routineSteps` the number of time steps in the life cycle before reproduction, e.g. `4`.
+> `ecoTime` the number of time steps in the life cycle before reproduction, e.g. `4`.
+>
+> `v` the initial vigilance level (phenotype) of each individual (population initially monomorphic), e.g. `0.5`.
 > 
 > `mutRate` the mutation rate, e.g. `0.01`.
 > 
 > `mutStep` the mutation step (variance), e.g. `0.005`.
 > 
-> `initRes` the initial amount of resources in each cell on the ecosystem grid, e.g. `1.0`.
+> `initResources` the initial amount of resources in each cell on the ecosystem grid, e.g. `1.0`.
 > 
-> `efficiency` the gathering efficiency of resources by preys (alpha), e.g. `0.8`.
+> `eff` the gathering efficiency of resources by preys (alpha), e.g. `0.8`.
 > 
-> `predation` the basal predation rate in the absence of vigilance, e.g. `0.3`.
+> `p` the basal predation rate in the absence of vigilance, e.g. `0.3`.
 > 
 > `competition` the competition level for shared resources (gamma), e.g. `2.1`.
 > 
-> `growth` the resources natural growth rate (r), e.g. `1.2`.
+> `rGrowth` the resources natural growth rate (r), e.g. `1.2`.
+>
+> `maxGrowth` the maximum resources growth before crash, e.g. `200`.
+>
+> `residualFertility` fertility cannot be zero (poisson distribution), even when the individual has no resources, e.g. `0.0001`
 > 
 > `fecundity` the individual fecundity, e.g. `1.5`.
+>
+> `rdSeed` the random seed to launch the simulation, for reproducibility, e.g. `1`.
+>
+> `visual` boolean, whether you want to automatically launch visual, `0` for false and `1` for true.
 
 ## Roadmap
-
-- vizualization
-- independent txt file for parameters
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
