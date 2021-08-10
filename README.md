@@ -3,7 +3,11 @@ Coding challenge assigned by Hanno Hildenbrandt for a programmer position at RUG
 
 ## Visual
 
-Coming soon!
+
+Exploration                  | Trait evolution
+:---------------------------:|:----------------------------:
+![eanim](gifs/ecosystem.gif) | ![vanim](gifs/vigilance.gif)
+
 
 ## Model description
 
