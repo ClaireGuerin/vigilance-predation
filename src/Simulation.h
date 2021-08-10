@@ -24,6 +24,8 @@ namespace vigi
 
             void save(std::ofstream&, std::ofstream&, std::ofstream&);
 
+            bool vis() const { return param_.visual; }
+
         private:
             std::string dir_;
             Parameter param_;
