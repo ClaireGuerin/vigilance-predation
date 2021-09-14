@@ -8,11 +8,13 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include "src/Simulation.h"
+#include "src/Individual.h"
 
 int main(int argc, char* argv[]) 
 {
   try 
   {
+    //std::vector<vigi::Individual> {10, 2}
 
     std::string pathname = "some-data/"; // default
     if (argc > 1) pathname = argv[1];
