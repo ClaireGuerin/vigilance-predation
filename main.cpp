@@ -16,13 +16,13 @@ int main(int argc, char* argv[])
   {
     //std::vector<vigi::Individual> {10, 2}
 
-    std::string pathname = "some-data/"; // default
+    std::string pathname = "../somedata/"; // default
     if (argc > 1) pathname = argv[1];
 
-    std::ofstream ofsR(pathname + "resources_out.txt");
+    std::ofstream ofsR(pathname + "resources_out.txt", std::ofstream::out);
     if (!ofsR.is_open())
     {
-      throw std::runtime_error("unable to open resources file");
+      throw std::runtime_error("unable to open resources file " + pathname + "resources_out.txt");
     }
 
     std::ofstream ofsV(pathname + "vigilance_out.txt");
