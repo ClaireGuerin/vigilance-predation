@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
     {
       try
       {
-        system("Rscript ../anim-vigil/animate_sim.r");
+        system("Rscript ../anim-vigil/animate_sim.r ../output/");
 			  //system("xdg-open ../output/vigilance_out.gif");
 			  //system("xdg-open //.output/grid_out.gif");
       }
