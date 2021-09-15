@@ -63,6 +63,10 @@
 # All cmake files stored in build folder
 /build/*
 
-# Folder where I store data
-/somedata/*
+# Folder where I store data output
+/output/*
+
+# Repository with R code
+/anim-vigil
+/anim-vigil/*
 

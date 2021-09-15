@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
   {
     //std::vector<vigi::Individual> {10, 2}
 
-    std::string pathname = "../somedata/"; // default
+    std::string pathname = "../output/"; // default
     if (argc > 1) pathname = argv[1];
 
     std::ofstream ofsR(pathname + "resources_out.txt", std::ofstream::out);
@@ -46,18 +46,29 @@ int main(int argc, char* argv[])
 
     if (sim.vis()) 
     {
-
+      try
+      {
+        system("Rscript ../anim-vigil/animate_sim.r");
+			  //system("xdg-open ../output/vigilance_out.gif");
+			  //system("xdg-open //.output/grid_out.gif");
+      }
+      catch(const std::exception& e)
+      {
+        std::cerr << e.what() << '\n';
+      }
+      
+/* 
       struct stat info;
 
       if( stat( "anim-vigil/", &info ) != 0 )
-        throw std::runtime_error("cannot access " + pathname + "\n");
+        throw std::runtime_error("cannot find R animation program. Is it in root?\n");
       else if( info.st_mode & S_IFDIR )
       {
         system("Rscript anim-vigil/animate_sim.r");
 			  system("xdg-open output/vigilance_out.gif");
 			  system("xdg-open output/grid_out.gif");
       } else
-        throw std::runtime_error(pathname + " is no directory\n");
+        throw std::runtime_error(pathname + " is no directory\n"); */
     
     }
 

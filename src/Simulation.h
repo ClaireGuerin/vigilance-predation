@@ -16,7 +16,7 @@ namespace vigi
     class Simulation
     {
         public:
-            explicit Simulation(std::string);
+            Simulation(std::string, std::string);
 
             void setup();
 
@@ -42,9 +42,9 @@ namespace vigi
 
     };
 
-    Simulation::Simulation(std::string path) :
+    Simulation::Simulation(std::string path, std::string pathToPar = "../") :
         dir_(path),
-        param_(path),
+        param_(pathToPar),
         reng_(),
         population_(param_),
         resources_(param_.edgeSize, param_.initResources),

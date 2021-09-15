@@ -1,0 +1,17 @@
+edgeSize 10
+initResources 2.0
+popSize 20
+nGen 100
+ecoTime 4
+v 0.3
+mutRate 0.1
+mutStep 0.02
+p 0.4
+eff 0.8
+competition 1.5
+residualFertility 0.0001
+fecundity 1.1
+rGrowth 1.1
+maxGrowth 10.0
+rdSeed 3
+visual 1

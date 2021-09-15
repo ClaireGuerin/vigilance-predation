@@ -41,7 +41,7 @@ This code was developped under Linux (Ubuntu 20.04.2 LTS) with C++ 20.
 
 ## Usage
 
-After building, run the executable from command line, with the path to the folder where yous `parameters.txt` file is. This will also be the folder where the output will be saved. If `visual` is `1` in parameters, make sure to download [this repository](https://github.com/ClaireGuerin/anim-vigil) in the root of the program first.
+After building, run the executable from command line. It requires a path to the folder where your `parameters.txt` file is. By default, it is stored in root. Output files will be saved in the output folder. If `visual` is `1` in parameters, make sure to download [this repository](https://github.com/ClaireGuerin/anim-vigil) in the root of the program first.
 
 ### Parameters
 Change parameter values in `Parameters.h`.
