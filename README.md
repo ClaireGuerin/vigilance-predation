@@ -36,11 +36,11 @@ After a number of time steps (user-defined), the individuals who survived reprod
 
 1. Download this repository and place wherever convenient on your machine.
 2. Compile the code:
-  1. Install CMake with your package manager: `apt install cmake` 
-  2. Go to the root of the repository
-  3. Create build folder and move there: `mkdir build && cd build`
-  4. Run CMake to configure the project and generate a native build system from `CMakeLists.txt` in root: `cmake ..`
-  5. Compile the project: `cmake --build .`
+⋅⋅1. Install CMake with your package manager: `apt install cmake` 
+⋅⋅2. Go to the root of the repository
+⋅⋅3. Create build folder and move there: `mkdir build && cd build`
+⋅⋅4. Run CMake to configure the project and generate a native build system from `CMakeLists.txt` in root: `cmake ..`
+⋅⋅5. Compile the project: `cmake --build .`
 3. Run the executable: `./vigipred`
 
 ## Requirements
